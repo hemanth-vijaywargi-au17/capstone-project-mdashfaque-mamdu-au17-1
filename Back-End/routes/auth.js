@@ -7,7 +7,7 @@ const CLIENT_URL = "http://localhost:3000/";
 // Google Login Route
 authRoutes.get(
   "/google",
-  passport.authenticate("google", {scope: ['openid', 'email', 'profile']})
+  passport.authenticate("google", { scope: ["openid", "email", "profile"] })
 );
 
 // Google Redirect Route (After Auth)
@@ -27,7 +27,7 @@ authRoutes.get("/logout", (req, res) => {
 
 authRoutes.get("/login/failed", (req, res) => {
   res.status(401).json({
-    error: true,
+    error: true, 
     message: "failure",
   });
 });
@@ -40,9 +40,12 @@ authRoutes.get("/login/success", (req, res) => {
       user: req.user,
       cookies: req.cookies,
     });
+  } else {
+    res.json({
+      error: true,
+      message: "User Not logged In!",
+    });
   }
 });
-
-
 
 module.exports = authRoutes;

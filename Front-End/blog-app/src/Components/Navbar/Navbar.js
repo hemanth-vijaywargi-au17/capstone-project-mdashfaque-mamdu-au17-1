@@ -1,14 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { IoIosNotificationsOutline } from 'react-icons/io';
-import { BsSearch } from 'react-icons/bs';
-import { BsBookmarks } from 'react-icons/bs';
-import './navbar.css';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { BsSearch } from "react-icons/bs";
+import { BsBookmarks } from "react-icons/bs";
+import "./navbar.css";
+import { logout } from "../../Slices/userSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
+  const dispatch = useDispatch()
 
   return (
     <div className="blog__navbar">
@@ -20,17 +21,11 @@ const Navbar = () => {
         </div>
         <div className="blog__navbar-container">
           <div className="blog__navbar-links-container">
-            {!user.email && (
-              <Link className="link" to="/membership">
-                Membership
-              </Link>
-            )}
-
-            {!user.email && (
+            {user.email ? (
               <Link className="link" to="/write">
                 Write
               </Link>
-            )}
+            ) : null}
           </div>
           <div className="blog__navbar-get-started">
             {user.email && <BsSearch></BsSearch>}
@@ -47,11 +42,16 @@ const Navbar = () => {
             )}
 
             {user.profilePicURL ? (
-              <img
-                className="profile-picture"
-                src={`${user.profilePicURL}`}
-                alt={`${user.name}`}
-              />
+              <>
+                <img
+                  className="profile-picture"
+                  src={`${user.profilePicURL}`}
+                  alt={`${user.name}`}
+                />
+                <button className="link" onClick={()=>{dispatch(logout())}}>
+                  Sign Out
+                </button>
+              </>
             ) : (
               <Link to="/signin">
                 <button className="get-started-btn" type="button">
