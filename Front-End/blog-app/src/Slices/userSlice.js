@@ -4,12 +4,8 @@ import axios from "axios";
 export const getUser = createAsyncThunk("user/get", async () => {
   let url = "/auth/login/success";
   let options = { credentials: "include" };
-  try {
-    let { data } = await axios.get(url, options);
-    return data.user;
-  } catch (err) {
-    return 
-  }
+  let { data } = await axios.get(url, options);
+  return data;
 });
 
 const userSlice = createSlice({
@@ -33,28 +29,29 @@ const userSlice = createSlice({
       window.open("http://localhost:5000/auth/logout", "_self");
     },
   },
-  extraReducers: {
-    [getUser.fulfilled]: (state, action) => {
-      const {
-        name,
-        email,
-        profilePicURL,
-        createdPosts,
-        readingList,
-        likedPosts,
-        followers,
-        following,
-      } = action.payload;
-      
-      state.name = name;
-      state.email = email;
-      state.profilePicURL = profilePicURL;
-      state.createdPosts = createdPosts;
-      state.readingList = readingList;
-      state.likedPosts = likedPosts;
-      state.followers = followers;
-      state.following = following;
-    },
+  extraReducers: (builder) => {
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      if (!action.payload.error) {
+        const {
+          name,
+          email,
+          profilePicURL,
+          createdPosts,
+          readingList,
+          likedPosts,
+          followers,
+          following,
+        } = action.payload.user;
+        state.name = name;
+        state.email = email;
+        state.profilePicURL = profilePicURL;
+        state.createdPosts = createdPosts;
+        state.readingList = readingList;
+        state.likedPosts = likedPosts;
+        state.followers = followers;
+        state.following = following;
+      }
+    });
   },
 });
 

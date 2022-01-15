@@ -19,10 +19,6 @@ function SignIn() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
-
   const handleSignIn = () => {
     dispatch(login("google"));
   };
