@@ -19,6 +19,7 @@ const userSlice = createSlice({
     likedPosts: [],
     followers: [],
     following: [],
+    _id: null,
   },
   reducers: {
     login: (state, action) => {
@@ -41,6 +42,7 @@ const userSlice = createSlice({
           likedPosts,
           followers,
           following,
+          _id,
         } = action.payload.user;
         state.name = name;
         state.email = email;
@@ -50,6 +52,7 @@ const userSlice = createSlice({
         state.likedPosts = likedPosts;
         state.followers = followers;
         state.following = following;
+        state._id = _id;
       }
     });
   },
