@@ -4,7 +4,7 @@ const PostSchema = Schema(
   {
     title: { type: Schema.Types.String, required: true },
     summary: { type: Schema.Types.String },
-    body: { type: Schema.Types.String, required: true },
+    body: { type: Object, required: true },
     author: { type: Schema.Types.ObjectId, required: true, ref: "User" },
     likes: { type: Schema.Types.Number, required: true },
     mainImageURL: { type: Schema.Types.String },
