@@ -11,6 +11,10 @@
   right: 0;
 }
 
+.main-body {
+  position: relative;
+  width: 100%;
+}
 .blog__navbar-links {
   flex: 1;
   display: flex;

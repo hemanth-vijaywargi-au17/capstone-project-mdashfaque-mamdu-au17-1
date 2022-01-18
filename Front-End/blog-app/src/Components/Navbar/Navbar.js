@@ -1,15 +1,29 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { BsSearch } from "react-icons/bs";
-import { BsBookmarks } from "react-icons/bs";
-import "./navbar.css";
-import { logout } from "../../Slices/userSlice";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { IoIosNotificationsOutline } from 'react-icons/io';
+import { BsSearch } from 'react-icons/bs';
+import { BsBookmarks } from 'react-icons/bs';
+import './navbar.css';
+import { logout } from '../../Slices/userSlice';
+import Submenu from '../Submenu/Submenu';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const openSubmenu = (e) => {
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right) / 2;
+
+    console.log(center);
+    setIsSubmenuOpen(!isSubmenuOpen);
+  };
+
+  // const handleSubmenu = () => {
+  //   setIsSubmenuOpen(false);
+  // };
 
   return (
     <div className="blog__navbar">
@@ -47,10 +61,17 @@ const Navbar = () => {
                   className="profile-picture"
                   src={`${user.profilePicURL}`}
                   alt={`${user.name}`}
+                  onClick={openSubmenu}
                 />
-                <button className="link" onClick={()=>{dispatch(logout())}}>
+                {isSubmenuOpen && <Submenu />}
+                {/* <button
+                  className="link"
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
                   Sign Out
-                </button>
+                </button> */}
               </>
             ) : (
               <Link to="/signin">

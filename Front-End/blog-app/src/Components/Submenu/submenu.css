@@ -1,0 +1,21 @@
+.submenu {
+  position: absolute;
+  top: 5rem;
+  right: -5rem;
+  width: 50%;
+  border: 1px solid red;
+  padding: 0.5rem 1rem;
+}
+
+.profile-picture {
+  width: 2.2rem;
+  border-radius: 50%;
+  position: relative;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid green;
+  padding-bottom: 2rem;
+}
