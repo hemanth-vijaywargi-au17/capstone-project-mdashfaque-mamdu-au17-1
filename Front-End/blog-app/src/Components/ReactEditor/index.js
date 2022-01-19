@@ -1,8 +1,8 @@
 import { useRef, useCallback } from "react";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
-import { useSelector } from 'react-redux'
-import cloudinaryUpload from "../../Hooks/cloudinaryUpload";
+import { useDispatch, useSelector } from "react-redux";
+import { postArticle } from "../../Slices/userSlice";
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -12,33 +12,27 @@ function ReactEditor() {
   const file = useRef();
   const summary = useRef();
   const category = useRef();
-  const { _id } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleInitialize = useCallback((instance) => {
     editorCore.current = instance;
   }, []);
 
-  const handleSave = useCallback(async () => {
-    const savedData = await editorCore.current.save();
-    let url = "";
-    if(file.current.files[0]){
-      const {secure_url} = await cloudinaryUpload(file.current.files[0])
-      url = secure_url
-    }
-    const postObj = {
+  const handleSave = useCallback(async (e) => {
+    e.preventDefault();
+    const articleBody = await editorCore.current.save();
+    const articleObj = {
+      file: file.current.files[0],
       title: title.current.value,
       summary: summary.current.value,
-      body: savedData,
-      author: _id,
-      likes: 0,
-      mainImageURL: url,
-      tags: category.current.value.split(" "),
+      articleBody,
+      category: category.current.value,
     };
-    console.log(postObj)
+    dispatch(postArticle(articleObj));
   }, []);
 
   return (
-    <div className="w-full flex justify-center">
+    <form className="w-full flex justify-center" onSubmit={handleSave}>
       <div className="mx-8 md:mx-0 md:w-2/3 flex flex-col items-center gap-2">
         <h1>Write an Article</h1>
         <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 w-fit text-center">
@@ -50,6 +44,7 @@ function ReactEditor() {
             type="text"
             className="col-span-2 lg:col-span-3 p-2 text-base"
             ref={title}
+            required
           />
 
           <div className="grid place-content-center">
@@ -60,6 +55,7 @@ function ReactEditor() {
             type="file"
             className="col-span-2 lg:col-span-3 p-2 text-base"
             ref={file}
+            required
           />
 
           <div className="grid place-content-center">
@@ -69,15 +65,17 @@ function ReactEditor() {
             type="text"
             className="col-span-2 lg:col-span-3 p-2 text-base"
             ref={summary}
+            required
           />
 
           <div className="grid place-content-center">
-            <label htmlFor="">Category (space seperated)</label>
+            <label htmlFor="">Category (Comma seperated)</label>
           </div>
           <input
             type="text"
             className="col-span-2 lg:col-span-3 p-2 text-base"
             ref={category}
+            required
           />
         </div>
 
@@ -90,10 +88,10 @@ function ReactEditor() {
         </div>
 
         <div className="flex justify-center my-2">
-          <button onClick={handleSave}>Post</button>
+          <button type="submit">Post</button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 
