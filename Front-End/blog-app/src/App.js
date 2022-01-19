@@ -7,11 +7,13 @@ import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home";
 import { getUser } from "./Slices/userSlice";
 import { useDispatch } from "react-redux";
+import { getAllPosts } from "./Slices/appSlice";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getAllPosts())
   }, []);
   return (
     <BrowserRouter>

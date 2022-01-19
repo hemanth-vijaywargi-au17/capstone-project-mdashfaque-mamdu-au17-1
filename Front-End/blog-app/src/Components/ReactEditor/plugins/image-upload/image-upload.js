@@ -1,8 +1,9 @@
 import "./image-upload.css";
-import cloudinaryUpload from "../../../../Hooks/cloudinaryUpload";
+import cloudinaryUpload from "../../../../Utils/cloudinaryUpload";
 
 export default class ImageUpload {
   constructor({ data, api }) {
+    // Incoming data
     this.data = data;
     this.wrapper = document.createElement("div");
     this.wrapper.classList = "cdx-block image-upload-tool";
@@ -10,6 +11,7 @@ export default class ImageUpload {
     this.caption = undefined;
   }
 
+  // Toolbox UI is returned from this
   static get toolbox() {
     return {
       title: "Image",
@@ -25,7 +27,8 @@ export default class ImageUpload {
       reader.readAsDataURL(file);
     });
   };
-
+  
+  // Block to be Rendered is returned from here
   render() {
     // Image Input
     const imageInput = document.createElement("input");
@@ -54,6 +57,7 @@ export default class ImageUpload {
     return this.wrapper;
   }
 
+  // Saved data is returned here
   async save(blockContent) {
     if (this.file) {
       const { secure_url } = await cloudinaryUpload(this.file);
@@ -68,6 +72,8 @@ export default class ImageUpload {
     };
   }
 
+
+  // Saved data validation
   validate(savedData) {
     if (!savedData.url.trim()) {
       return false;
