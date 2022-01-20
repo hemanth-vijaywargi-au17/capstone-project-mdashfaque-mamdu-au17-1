@@ -1,6 +1,7 @@
 /* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
+
 img{
     max-width: 100%;
 }
@@ -59,3 +60,4 @@ input[type=file]::file-selector-button{
 input[type=file]::file-selector-button:hover {
     background-color: lightgray;
 }
+
