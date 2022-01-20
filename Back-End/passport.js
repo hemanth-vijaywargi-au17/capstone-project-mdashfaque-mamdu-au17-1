@@ -9,7 +9,7 @@ const google_options = {
 };
 
 const google_callback = async (accessToken, refreshToken, profile, cb) => {
-  const dbResponse = await User.findOne({ email: profile.emails[0].value }).populate('createdPosts');
+  const dbResponse = await User.findOne({ email: profile.emails[0].value });
   if (dbResponse) {
     cb(null, dbResponse);
   } else {
