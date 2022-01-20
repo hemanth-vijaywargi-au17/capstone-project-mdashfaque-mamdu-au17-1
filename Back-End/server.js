@@ -5,6 +5,8 @@ const passport = require("passport");
 require("dotenv").config();
 const passportSetup = require("./passport.js");
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/userRoutes");
+const appRoutes = require("./routes/appRoutes");
 
 // Creating the express server
 const app = express();
@@ -18,10 +20,14 @@ app.use(
   })
 );
 
+app.use(express.json())
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/app", appRoutes);
 
 // DB
 const { dbConnect } = require("./db");

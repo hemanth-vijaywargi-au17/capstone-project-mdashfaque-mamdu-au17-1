@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import cloudinaryUpload from "../Utils/cloudinaryUpload";
 
 export const getUser = createAsyncThunk("user/get", async () => {
   let url = "/auth/login/success";
@@ -7,6 +8,33 @@ export const getUser = createAsyncThunk("user/get", async () => {
   let { data } = await axios.get(url, options);
   return data;
 });
+
+
+export const postArticle = createAsyncThunk(
+  "user/article/post",
+  async (articleObj, { getState }) => {
+    const { file, title, summary, articleBody, category } = articleObj;
+    const _id = getState().user._id;
+    const postObj = {
+      title: title,
+      summary: summary,
+      body: articleBody,
+      author: _id,
+      likes: 0,
+      thumbnailURL: "",
+      tags: category.length !== 0 ? category.split(",") : [],
+      comments: [],
+    };
+
+    if (file) {
+      const { secure_url } = await cloudinaryUpload(file);
+      postObj.thumbnailURL = secure_url;
+    }
+
+    let { data } = await axios.post("/user/article/post", postObj);
+    return data
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -19,6 +47,7 @@ const userSlice = createSlice({
     likedPosts: [],
     followers: [],
     following: [],
+    _id: null,
   },
   reducers: {
     login: (state, action) => {
@@ -41,6 +70,7 @@ const userSlice = createSlice({
           likedPosts,
           followers,
           following,
+          _id,
         } = action.payload.user;
         state.name = name;
         state.email = email;
@@ -50,7 +80,11 @@ const userSlice = createSlice({
         state.likedPosts = likedPosts;
         state.followers = followers;
         state.following = following;
+        state._id = _id;
       }
+    });
+    builder.addCase(postArticle.fulfilled, (state, action) => {
+      state.createdPosts.push(action.payload)
     });
   },
 });

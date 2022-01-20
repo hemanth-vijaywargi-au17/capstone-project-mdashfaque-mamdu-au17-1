@@ -9,10 +9,10 @@ const google_options = {
 };
 
 const google_callback = async (accessToken, refreshToken, profile, cb) => {
-  const dbResponse = await User.findOne({email:profile.emails[0].value})
-  if(dbResponse){
-    cb(null,dbResponse)
-  }else{
+  const dbResponse = await User.findOne({ email: profile.emails[0].value }).populate('createdPosts');
+  if (dbResponse) {
+    cb(null, dbResponse);
+  } else {
     let user = await User.create({
       name: profile.displayName,
       email: profile.emails[0].value,
@@ -22,7 +22,7 @@ const google_callback = async (accessToken, refreshToken, profile, cb) => {
       likedPosts: [],
       followers: [],
       following: [],
-    })
+    });
     cb(null, user);
   }
 };

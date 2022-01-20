@@ -1,0 +1,9 @@
+.image-upload-tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-upload-tool img{
+   width: 80%;
+}
