@@ -12,7 +12,7 @@ userRoutes.post("/article/post", async (req, res) => {
     );
     res.json(postObj);
   } else {
-    res.json("Not logged in!");
+    res.json({ error: true, message: "Not logged in!" });
   }
 });
 
@@ -30,7 +30,7 @@ userRoutes.post("/article/delete", async (req, res) => {
       res.json({ error: true, errorObj: err });
     }
   } else {
-    res.json("Not logged in!");
+    res.json({ error: true, message: "Not logged in!" });
   }
 });
 

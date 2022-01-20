@@ -3,16 +3,23 @@ import axios from "axios";
 import cloudinaryUpload from "../Utils/cloudinaryUpload";
 import { removeArticle } from "./appSlice";
 
-export const getUser = createAsyncThunk("user/get", async () => {
-  let url = "/auth/login/success";
-  let options = { credentials: "include" };
-  let { data } = await axios.get(url, options);
-  return data;
-});
+export const getUser = createAsyncThunk(
+  "user/get",
+  async (_, { rejectWithValue }) => {
+    let url = "/auth/login/success";
+    let options = { credentials: "include" };
+    let { data } = await axios.get(url, options);
+    if (data.error) {
+      return rejectWithValue(data);
+    } else {
+      return data;
+    }
+  }
+);
 
 export const postArticle = createAsyncThunk(
   "user/article/post",
-  async (articleObj, { getState,}) => {
+  async (articleObj, { getState }) => {
     const { file, title, summary, articleBody, category } = articleObj;
     const _id = getState().user._id;
     const postObj = {
@@ -38,17 +45,20 @@ export const postArticle = createAsyncThunk(
 
 export const deleteArticle = createAsyncThunk(
   "user/article/delete",
-  async (post_id, { getState, dispatch  }) => {
+  async (post_id, { getState, dispatch, rejectWithValue }) => {
     const user_id = getState().user._id;
     let { data } = await axios.post("/user/article/delete", {
       post_id: post_id,
       user_id: user_id,
     });
-    if(!data.error){
-      dispatch(removeArticle(post_id))
+
+    if (!data.error) {
+      dispatch(removeArticle(post_id));
+      data.post_id = post_id;
+      return data;
+    } else {
+      return rejectWithValue(data);
     }
-    data.post_id = post_id;
-    return data;
   }
 );
 
@@ -76,38 +86,34 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUser.fulfilled, (state, action) => {
-      if (!action.payload.error) {
-        const {
-          name,
-          email,
-          profilePicURL,
-          createdPosts,
-          readingList,
-          likedPosts,
-          followers,
-          following,
-          _id,
-        } = action.payload.user;
-        state.name = name;
-        state.email = email;
-        state.profilePicURL = profilePicURL;
-        state.createdPosts = createdPosts;
-        state.readingList = readingList;
-        state.likedPosts = likedPosts;
-        state.followers = followers;
-        state.following = following;
-        state._id = _id;
-      }
+      const {
+        name,
+        email,
+        profilePicURL,
+        createdPosts,
+        readingList,
+        likedPosts,
+        followers,
+        following,
+        _id,
+      } = action.payload.user;
+      state.name = name;
+      state.email = email;
+      state.profilePicURL = profilePicURL;
+      state.createdPosts = createdPosts;
+      state.readingList = readingList;
+      state.likedPosts = likedPosts;
+      state.followers = followers;
+      state.following = following;
+      state._id = _id;
     });
     builder.addCase(postArticle.fulfilled, (state, action) => {
       state.createdPosts.push(action.payload);
     });
     builder.addCase(deleteArticle.fulfilled, (state, action) => {
-      if (!action.payload.error) {
-        state.createdPosts = state.createdPosts.filter(
-          (obj) => obj._id !== action.payload.post_id
-        );
-      }
+      state.createdPosts = state.createdPosts.filter(
+        (obj) => obj._id !== action.payload.post_id
+      );
     });
   },
 });
