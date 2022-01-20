@@ -5,9 +5,10 @@ import SignIn from "./Components/SignIn";
 import Write from "./Components/Write";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home";
-import { deleteArticle, getUser } from "./Slices/userSlice";
+import { getUser } from "./Slices/userSlice";
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "./Slices/appSlice";
+import Article from "./Components/Article/Article";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/write" element={<Write />}></Route>
+        <Route path="/article/:id" element={<Article />}></Route>
       </Routes>
     </BrowserRouter>
   );
