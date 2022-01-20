@@ -6,7 +6,7 @@ import { logout } from '../../Slices/userSlice';
 
 const Submenu = ({ isActive, setIsActive }) => {
   const user = useSelector((state) => state.user);
-  console.log(isActive);
+
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,7 +31,7 @@ const Submenu = ({ isActive, setIsActive }) => {
   return (
     <div
       ref={dropdownRef}
-      className={`menu ${isActive ? 'active' : 'inactive'}`}
+      className={`custom-menu ${isActive ? 'active' : 'inactive'}`}
     >
       <div className="profile-info">
         <img
@@ -46,35 +46,26 @@ const Submenu = ({ isActive, setIsActive }) => {
       </div>
       <div className="underline"></div>
       <div className="user-info">
-        <ul>
-          <li>
-            <Link className="links-profile" to="/write">
-              Write a story
-            </Link>
-          </li>
+        <Link className="custom-links-profile" to="/write">
+          Write a story
+        </Link>
 
-          <li>
-            <Link className="links-profile" to="/profile">
-              Design your profile
-            </Link>
-          </li>
+        <Link className="custom-links-profile" to="/profile">
+          Design your profile
+        </Link>
 
-          <li>
-            <Link className="links-profile" to="/Help">
-              Help
-            </Link>
-          </li>
-          <li>
-            <button
-              className="links-profile"
-              onClick={() => {
-                dispatch(logout());
-              }}
-            >
-              Sign Out
-            </button>
-          </li>
-        </ul>
+        <Link className="custom-links-profile" to="/Help">
+          Help
+        </Link>
+
+        <button
+          className="custom-links-profile sign-out-btn"
+          onClick={() => {
+            dispatch(logout());
+          }}
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   );

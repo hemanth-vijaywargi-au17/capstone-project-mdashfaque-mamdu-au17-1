@@ -1,19 +1,19 @@
 .blog__navbar {
-  display: flex;
-  align-items: center;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   background-color: white;
-  z-index: 10;
-  padding: 1rem 7rem;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 0.5rem;
 }
-.blog__brand{
+
+.blog__brand {
   font-weight: bold;
   font-size: 2rem;
 }
-.blog__navbar a{
+.blog__navbar a {
   text-decoration: none;
   color: black;
 }
@@ -46,6 +46,7 @@
 .blog__navbar-links-container {
   display: flex;
   justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
   flex-direction: row;
@@ -62,16 +63,17 @@
   font-weight: 500;
   font-size: 1.2rem;
   line-height: 2rem;
-  margin: 0 1rem;
   cursor: pointer;
 }
 
 .get-started-btn {
   font-size: 1rem;
-  padding: 0.5em 1em;
+  padding: 0.6em 1.2em;
   border-radius: 1.5rem;
   background-color: #40c057;
   color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 .get-started-btn:hover {
@@ -95,7 +97,6 @@ profile-picture:hover {
   }
 
   .blog__navbar-links__logo h2 {
-    /* font-size: 1.5rem; */
     font-weight: 700;
   }
 
@@ -109,9 +110,14 @@ profile-picture:hover {
 
 @media screen and (max-width: 550px) {
   .blog__navbar {
-    width: 90%;
+    width: 90% !important;
+    margin: 0 auto;
   }
   .blog__navbar-get-started .link {
+    display: none;
+  }
+
+  .bookmark-icon {
     display: none;
   }
 }
