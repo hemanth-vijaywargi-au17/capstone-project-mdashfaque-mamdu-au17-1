@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import cloudinaryUpload from "../Utils/cloudinaryUpload";
+import { removeArticle } from "./appSlice";
 
 export const getUser = createAsyncThunk("user/get", async () => {
   let url = "/auth/login/success";
@@ -9,10 +10,9 @@ export const getUser = createAsyncThunk("user/get", async () => {
   return data;
 });
 
-
 export const postArticle = createAsyncThunk(
   "user/article/post",
-  async (articleObj, { getState }) => {
+  async (articleObj, { getState,}) => {
     const { file, title, summary, articleBody, category } = articleObj;
     const _id = getState().user._id;
     const postObj = {
@@ -32,7 +32,23 @@ export const postArticle = createAsyncThunk(
     }
 
     let { data } = await axios.post("/user/article/post", postObj);
-    return data
+    return data;
+  }
+);
+
+export const deleteArticle = createAsyncThunk(
+  "user/article/delete",
+  async (post_id, { getState, dispatch  }) => {
+    const user_id = getState().user._id;
+    let { data } = await axios.post("/user/article/delete", {
+      post_id: post_id,
+      user_id: user_id,
+    });
+    if(!data.error){
+      dispatch(removeArticle(post_id))
+    }
+    data.post_id = post_id;
+    return data;
   }
 );
 
@@ -84,7 +100,14 @@ const userSlice = createSlice({
       }
     });
     builder.addCase(postArticle.fulfilled, (state, action) => {
-      state.createdPosts.push(action.payload)
+      state.createdPosts.push(action.payload);
+    });
+    builder.addCase(deleteArticle.fulfilled, (state, action) => {
+      if (!action.payload.error) {
+        state.createdPosts = state.createdPosts.filter(
+          (obj) => obj._id !== action.payload.post_id
+        );
+      }
     });
   },
 });

@@ -5,7 +5,7 @@ import SignIn from "./Components/SignIn";
 import Write from "./Components/Write";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home";
-import { getUser } from "./Slices/userSlice";
+import { deleteArticle, getUser } from "./Slices/userSlice";
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "./Slices/appSlice";
 
