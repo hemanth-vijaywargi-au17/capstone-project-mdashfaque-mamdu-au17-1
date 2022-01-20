@@ -9,6 +9,7 @@
   top: 0;
   left: 0;
   right: 0;
+  /* position: relative; */
 }
 
 .main-body {
@@ -74,8 +75,14 @@
 .profile-picture {
   width: 2.2rem;
   border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
 }
 
+profile-picture:hover {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
 @media screen and (max-width: 750px) {
   .blog__navbar-links-container {
     display: none;

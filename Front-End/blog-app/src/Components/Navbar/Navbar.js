@@ -10,15 +10,12 @@ import Submenu from '../Submenu/Submenu';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  // const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const dispatch = useDispatch();
 
   const openSubmenu = (e) => {
-    const tempBtn = e.target.getBoundingClientRect();
-    const center = (tempBtn.left + tempBtn.right) / 2;
-
-    console.log(center);
-    setIsSubmenuOpen(!isSubmenuOpen);
+    setIsActive(!isActive);
   };
 
   // const handleSubmenu = () => {
@@ -63,7 +60,9 @@ const Navbar = () => {
                   alt={`${user.name}`}
                   onClick={openSubmenu}
                 />
-                {isSubmenuOpen && <Submenu />}
+                {isActive && (
+                  <Submenu isActive={isActive} setIsActive={setIsActive} />
+                )}
                 {/* <button
                   className="link"
                   onClick={() => {
