@@ -50,17 +50,18 @@ const Submenu = ({ isActive, setIsActive }) => {
       </div>
       <div className="underline"></div>
       <div className="user-info">
-        <Link className="custom-links-profile" to="/write">
-          Write a story
-        </Link>
+        <ul>
+          <li>
+            <Link className="links-profile" to="/write">
+              Write a story
+            </Link>
+          </li>
 
-        <Link className="custom-links-profile" to="/profile">
-          Design your profile
-        </Link>
-
-        <Link className="custom-links-profile" to="/Help">
-          Help
-        </Link>
+          <li>
+            <Link className="links-profile" to="/profile">
+              Design your profile
+            </Link>
+          </li>
 
           <li>
             <Link className="links-profile" to="/Help">
@@ -78,7 +79,6 @@ const Submenu = ({ isActive, setIsActive }) => {
             </button>
           </li>
         </ul>
-
       </div>
     </div>
   );
