@@ -45,11 +45,9 @@ export const postArticle = createAsyncThunk(
 
 export const deleteArticle = createAsyncThunk(
   "user/article/delete",
-  async (post_id, { getState, dispatch, rejectWithValue }) => {
-    const user_id = getState().user._id;
+  async (post_id, { dispatch, rejectWithValue }) => {
     let { data } = await axios.post("/user/article/delete", {
       post_id: post_id,
-      user_id: user_id,
     });
 
     if (!data.error) {

@@ -9,11 +9,18 @@ const google_options = {
 };
 
 const google_callback = async (accessToken, refreshToken, profile, cb) => {
+  let user = {
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    profilePicURL: profile.photos[0].value,
+    _id: null,
+  }
   const dbResponse = await User.findOne({ email: profile.emails[0].value });
   if (dbResponse) {
-    cb(null, dbResponse);
+    user._id = dbResponse._id;
+    cb(null, user);
   } else {
-    let user = await User.create({
+    let dbResponse = await User.create({
       name: profile.displayName,
       email: profile.emails[0].value,
       profilePicURL: profile.photos[0].value,
@@ -23,6 +30,7 @@ const google_callback = async (accessToken, refreshToken, profile, cb) => {
       followers: [],
       following: [],
     });
+    user._id = dbResponse._id;
     cb(null, user);
   }
 };
