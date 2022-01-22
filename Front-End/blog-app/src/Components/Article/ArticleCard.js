@@ -1,9 +1,11 @@
+// React
 import React from "react";
+// React Router
 import { useNavigate } from "react-router-dom";
 
 function ArticleCard(props) {
-  const { author, title, summary, thumbnailURL, tags, updatedAt, _id } = props;
-  const date = new Date(updatedAt);
+  const { author, title, summary, thumbnailURL, tags, date, _id } = props;
+
   const navigate = useNavigate()
   return (
     <div className="grid grid-cols-4 gap-4 p-2 lg:w-2/5 mx-4 my-2 font-sans cursor-pointer" onClick={()=>{navigate(`/article/${_id}`)}}>

@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { IoIosNotificationsOutline } from 'react-icons/io';
-import { BsSearch } from 'react-icons/bs';
-import { BsBookmarks } from 'react-icons/bs';
-import './navbar.css';
-import Submenu from '../Submenu/Submenu';
+// React
+import React, { useState } from "react";
+// Components
+import Submenu from "../Submenu/Submenu";
+// Redux
+import { useSelector } from "react-redux";
+// React Router
+import { Link } from "react-router-dom";
+// React Icons
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { BsSearch } from "react-icons/bs";
+import { BsBookmarks } from "react-icons/bs";
+// CSS
+import "./navbar.css";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);

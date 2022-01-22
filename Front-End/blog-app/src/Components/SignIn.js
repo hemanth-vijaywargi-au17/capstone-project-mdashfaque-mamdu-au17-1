@@ -1,30 +1,23 @@
+// Components
 import SignInButton from "./Buttons/SignInButton";
 import SignOutButton from "./Buttons/SignOutButton";
-import { useEffect, useState } from "react";
-import { getUser, login, logout } from "../Slices/userSlice";
+// Redux
+import { userActions } from "../Redux/Slices/user";
 import { useDispatch, useSelector } from "react-redux";
 
 function SignIn() {
-  const {
-    name,
-    email,
-    profilePicURL,
-    createdPosts,
-    readingList,
-    likedPosts,
-    followers,
-    following,
-    isLoading,
-  } = useSelector((state) => state.user);
+  const { name, email, profilePicURL, isLoading } = useSelector(
+    (state) => state.user
+  );
 
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    dispatch(login("google"));
+    dispatch(userActions.login("google"));
   };
 
   const handleSignOut = () => {
-    dispatch(logout());
+    dispatch(userActions.logOut());
   };
 
   return (
@@ -35,7 +28,11 @@ function SignIn() {
         <>
           {name ? (
             <>
-              <img className="w-14 h-14 rounded-full" src={profilePicURL} alt="user pic"/>
+              <img
+                className="w-14 h-14 rounded-full"
+                src={profilePicURL}
+                alt="user pic"
+              />
               <div className="text-xl">{name}</div>
               <div className="text-xl">{email}</div>
               <SignOutButton method={handleSignOut} />

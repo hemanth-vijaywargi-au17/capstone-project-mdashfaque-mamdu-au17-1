@@ -1,23 +1,31 @@
+// React
 import React, { useEffect } from "react";
+// React Router
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
+// Components
 import SignIn from "./Components/SignIn";
 import Write from "./Components/Write";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home";
-import { getUser } from "./Slices/userSlice";
-import { useDispatch } from "react-redux";
-import { getAllPosts } from "./Slices/appSlice";
 import Article from "./Components/Article/Article";
+import { ToastContainer } from "react-toastify";
+// Redux
+import { useDispatch } from "react-redux";
+import { userActions } from "./Redux/Slices/user";
+import { appActions } from "./Redux/Slices/app";
+// CSS
+import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUser());
-    dispatch(getAllPosts())
+    dispatch(userActions.getUser());
+    dispatch(appActions.getAllPosts());
   }, []);
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>

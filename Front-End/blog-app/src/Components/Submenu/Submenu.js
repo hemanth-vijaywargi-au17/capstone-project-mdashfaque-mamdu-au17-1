@@ -1,14 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './submenu.css';
-import { Link } from 'react-router-dom';
-import { logout } from '../../Slices/userSlice';
+// React
+import React, { useRef, useEffect } from "react";
+// React Router
+import { Link } from "react-router-dom";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../Redux/Slices/user";
+// CSS
+import "./submenu.css";
 
 const Submenu = ({ isActive, setIsActive }) => {
   const user = useSelector((state) => state.user);
-
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const pageClickEvent = (e) => {
       if (
@@ -20,18 +24,18 @@ const Submenu = ({ isActive, setIsActive }) => {
     };
 
     if (isActive) {
-      window.addEventListener('click', pageClickEvent);
+      window.addEventListener("click", pageClickEvent);
     }
 
     return () => {
-      window.removeEventListener('click', pageClickEvent);
+      window.removeEventListener("click", pageClickEvent);
     };
   }, [isActive]);
 
   return (
     <div
       ref={dropdownRef}
-      className={`custom-menu ${isActive ? 'active' : 'inactive'}`}
+      className={`menu ${isActive ? "active" : "inactive"}`}
     >
       <div className="profile-info">
         <img
@@ -58,14 +62,23 @@ const Submenu = ({ isActive, setIsActive }) => {
           Help
         </Link>
 
-        <button
-          className="custom-links-profile sign-out-btn"
-          onClick={() => {
-            dispatch(logout());
-          }}
-        >
-          Sign Out
-        </button>
+          <li>
+            <Link className="links-profile" to="/Help">
+              Help
+            </Link>
+          </li>
+          <li>
+            <button
+              className="links-profile"
+              onClick={() => {
+                dispatch(userActions.logout());
+              }}
+            >
+              Sign Out
+            </button>
+          </li>
+        </ul>
+
       </div>
     </div>
   );
