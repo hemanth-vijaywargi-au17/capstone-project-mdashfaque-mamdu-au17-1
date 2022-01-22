@@ -1,12 +1,12 @@
 // React
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 // React Router
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 // Redux
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../../Redux/Slices/user";
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../../Redux/Slices/user';
 // CSS
-import "./submenu.css";
+import './submenu.css';
 
 const Submenu = ({ isActive, setIsActive }) => {
   const user = useSelector((state) => state.user);
@@ -24,18 +24,18 @@ const Submenu = ({ isActive, setIsActive }) => {
     };
 
     if (isActive) {
-      window.addEventListener("click", pageClickEvent);
+      window.addEventListener('click', pageClickEvent);
     }
 
     return () => {
-      window.removeEventListener("click", pageClickEvent);
+      window.removeEventListener('click', pageClickEvent);
     };
   }, [isActive]);
 
   return (
     <div
       ref={dropdownRef}
-      className={`menu ${isActive ? "active" : "inactive"}`}
+      className={`custom-menu ${isActive ? 'active' : 'inactive'}`}
     >
       <div className="profile-info">
         <img
@@ -50,35 +50,26 @@ const Submenu = ({ isActive, setIsActive }) => {
       </div>
       <div className="underline"></div>
       <div className="user-info">
-        <ul>
-          <li>
-            <Link className="links-profile" to="/write">
-              Write a story
-            </Link>
-          </li>
+        <Link className="custom-links-profile" to="/write">
+          Write a story
+        </Link>
 
-          <li>
-            <Link className="links-profile" to="/profile">
-              Design your profile
-            </Link>
-          </li>
+        <Link className="custom-links-profile" to="/profile">
+          Design your profile
+        </Link>
 
-          <li>
-            <Link className="links-profile" to="/Help">
-              Help
-            </Link>
-          </li>
-          <li>
-            <button
-              className="links-profile"
-              onClick={() => {
-                dispatch(userActions.logOut());
-              }}
-            >
-              Sign Out
-            </button>
-          </li>
-        </ul>
+        <Link className="custom-links-profile" to="/Help">
+          Help
+        </Link>
+
+        <button
+          className="custom-links-profile sign-out-btn"
+          onClick={() => {
+            dispatch(userActions.logOut());
+          }}
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   );
