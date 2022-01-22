@@ -15,16 +15,11 @@ import "./navbar.css";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  // const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
   const openSubmenu = (e) => {
     setIsActive(!isActive);
   };
-
-  // const handleSubmenu = () => {
-  //   setIsSubmenuOpen(false);
-  // };
 
   return (
     <div className="blog__navbar">
@@ -44,7 +39,9 @@ const Navbar = () => {
           </div>
           <div className="blog__navbar-get-started">
             {user.email && <BsSearch></BsSearch>}
-            {user.email && <BsBookmarks></BsBookmarks>}
+            {user.email && (
+              <BsBookmarks className="bookmark-icon"></BsBookmarks>
+            )}
             {user.email ? (
               <IoIosNotificationsOutline
                 className="icons"
@@ -67,14 +64,6 @@ const Navbar = () => {
                 {isActive && (
                   <Submenu isActive={isActive} setIsActive={setIsActive} />
                 )}
-                {/* <button
-                  className="link"
-                  onClick={() => {
-                    dispatch(logout());
-                  }}
-                >
-                  Sign Out
-                </button> */}
               </>
             ) : (
               <Link to="/signin">
