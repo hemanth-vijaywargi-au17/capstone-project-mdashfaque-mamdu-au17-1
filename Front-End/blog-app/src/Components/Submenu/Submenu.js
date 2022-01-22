@@ -72,7 +72,7 @@ const Submenu = ({ isActive, setIsActive }) => {
             <button
               className="links-profile"
               onClick={() => {
-                dispatch(userActions.logout());
+                dispatch(userActions.logOut());
               }}
             >
               Sign Out
