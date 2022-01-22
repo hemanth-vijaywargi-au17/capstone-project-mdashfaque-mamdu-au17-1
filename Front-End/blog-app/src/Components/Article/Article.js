@@ -1,10 +1,16 @@
+// React
+import { useEffect } from "react";
+// React EditorJS
 import Blocks from "editorjs-blocks-react-renderer";
 import renderers from "./renderers";
+// React Router
 import { useNavigate, useParams } from "react-router-dom";
+// React Redux
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getPost } from "../../Slices/appSlice";
-import { deleteArticle } from "../../Slices/userSlice";
+import { appActions } from "../../Redux/Slices/app";
+import { userActions } from "../../Redux/Slices/user";
+// Components
+import LikeButton from "../Buttons/LikeButton";
 
 const config = {
   image: {
@@ -19,16 +25,18 @@ const Article = () => {
     isLoading,
     error,
   } = useSelector((state) => state.app);
+  const { _id: user_id, likedPosts } = useSelector((state) => {
+    return state.user;
+  });
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPost(id));
+    dispatch(appActions.getPost(id));
   }, []);
 
   const handleDelete = () => {
-    dispatch(deleteArticle(id));
+    dispatch(userActions.deleteArticle(id));
   };
 
   return (
@@ -56,15 +64,27 @@ const Article = () => {
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
                   {article.tags.length !== 0 ? article.tags[0] : null}
                 </div>
-                <div
-                  className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
-                  onClick={() => {
-                    handleDelete();
-                    navigate("/");
+                {user_id === article.author._id ? (
+                  <div
+                    className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
+                    onClick={() => {
+                      handleDelete();
+                      navigate("/");
+                    }}
+                  >
+                    Delete
+                  </div>
+                ) : null}
+                <LikeButton
+                  isLiked={likedPosts.includes(id)}
+                  like={() => {
+                    dispatch(userActions.likeArticle(id));
                   }}
-                >
-                  Delete
-                </div>
+                  unlike={() => {
+                    dispatch(userActions.unlikeArticle(id));
+                  }}
+                />
+                <div>{article.likes}</div>
               </div>
             </div>
 

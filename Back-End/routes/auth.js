@@ -23,7 +23,7 @@ authRoutes.get(
 // Logout Route
 authRoutes.get("/logout", (req, res) => {
   req.logout();
-  res.redirect(CLIENT_URL);
+  res.json({ error: false });
 });
 
 authRoutes.get("/login/failed", (req, res) => {
