@@ -1,19 +1,9 @@
 import { toast } from "react-toastify";
 
-const logOut = {
+const getUser = {
   fulfilled: (state, action) => {
-    state.user = {
-      name: null,
-      email: null,
-      profilePicURL: null,
-      createdPosts: [],
-      readingList: [],
-      likedPosts: [],
-      followers: [],
-      following: [],
-      _id: null,
-    };
-    toast.info("You Signed Out!", {
+    state.user = action.payload.user;
+    toast.success("Sign In Successful", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: true,
@@ -27,4 +17,4 @@ const logOut = {
   pending: (state, action) => {},
 };
 
-export default logOut;
+export default getUser;

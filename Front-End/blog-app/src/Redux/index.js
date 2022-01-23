@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import ExtraReducers from "./ExtraReducers";
 import Thunks from "./Thunks";
 
 const appSlice = createSlice({
@@ -27,106 +27,28 @@ const appSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(Thunks.logOut.fulfilled, (state, action) => {
-      state.user = {
-        name: null,
-        email: null,
-        profilePicURL: null,
-        createdPosts: [],
-        readingList: [],
-        likedPosts: [],
-        followers: [],
-        following: [],
-        _id: null,
-      };
-      toast.info("You Signed Out!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    });
+    builder.addCase(Thunks.logOut.fulfilled, ExtraReducers.logOut.fulfilled);
 
-    builder.addCase(Thunks.getUser.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      toast.success("Sign In Successful", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    });
+    builder.addCase(Thunks.getUser.fulfilled, ExtraReducers.getUser.fulfilled);
 
     builder.addCase(
       Thunks.postArticle.fulfilled,
-      (state, { payload: { data, toastId } }) => {
-        state.user.createdPosts.push(data._id);
-        state.allPosts[data._id] = data;
-        toast.update(toastId, {
-          render: "Posted Successfully!",
-          type: "success",
-          isLoading: false,
-          position: "top-right",
-          autoClose: 3000,
-          closeOnClick: true,
-          hideProgressBar: true,
-        });
-      }
+      ExtraReducers.postArticle.fulfilled
     );
 
     builder.addCase(
       Thunks.postArticle.rejected,
-      (state, { payload: { toastId } }) => {
-        toast.update(toastId, {
-          render: "Posting Failed!",
-          type: "error",
-          isLoading: false,
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-        });
-      }
+      ExtraReducers.postArticle.rejected
     );
 
     builder.addCase(
       Thunks.deleteArticle.fulfilled,
-      (state, { payload: { data, toastId } }) => {
-        state.user.createdPosts = state.user.createdPosts.filter(
-          (obj) => obj._id !== data.post_id
-        );
-        delete state.allPosts[data.post_id];
-        toast.update(toastId, {
-          render: "Post Deleted Successfully!",
-          type: "success",
-          isLoading: false,
-          position: "top-right",
-          autoClose: 3000,
-          closeOnClick: true,
-          hideProgressBar: true,
-        });
-      }
+      ExtraReducers.deleteArticle.fulfilled
     );
 
     builder.addCase(
       Thunks.deleteArticle.rejected,
-      (state, { payload: { toastId } }) => {
-        toast.update(toastId, {
-          render: "Operation Failed!",
-          type: "error",
-          isLoading: false,
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-        });
-      }
+      ExtraReducers.deleteArticle.rejected
     );
 
     builder.addCase(Thunks.likeArticle.fulfilled, (state, action) => {
@@ -149,22 +71,15 @@ const appSlice = createSlice({
       }, state.allPosts);
     });
 
-    builder.addCase(Thunks.getPost.pending, (state, action) => {
-      state.isLoading = true;
-    });
+    builder.addCase(Thunks.getPost.pending, ExtraReducers.getPost.pending);
+    builder.addCase(Thunks.getPost.fulfilled, ExtraReducers.getPost.fulfilled);
+    builder.addCase(Thunks.getPost.rejected, ExtraReducers.getPost.rejected);
 
-    builder.addCase(Thunks.getPost.fulfilled, (state, action) => {
-      state.currentPost = action.payload;
-      state.isLoading = false;
-      state.error = "";
-      state.allPosts[action.payload._id] = action.payload;
-    });
-    
-    builder.addCase(Thunks.getPost.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error =
-        "Sorry, this article does not exist or It was removed by the author.";
-    });
+    builder.addCase(Thunks.addToReadingList.fulfilled, ExtraReducers.addToReadingList.fulfilled);
+    builder.addCase(Thunks.addToReadingList.rejected, ExtraReducers.addToReadingList.rejected);
+
+    builder.addCase(Thunks.removeFromReadingList.fulfilled, ExtraReducers.removeFromReadingList.fulfilled);
+    builder.addCase(Thunks.removeFromReadingList.rejected, ExtraReducers.removeFromReadingList.rejected);
   },
 });
 

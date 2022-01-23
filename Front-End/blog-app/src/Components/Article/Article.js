@@ -11,6 +11,7 @@ import { actions } from "../../Redux";
 
 // Components
 import LikeButton from "../Buttons/LikeButton";
+import ReadingListButton from "../Buttons/ReadingListButton";
 
 const config = {
   image: {
@@ -23,9 +24,11 @@ const Article = () => {
   const {
     isLoading,
     error,
-    user: { _id: user_id, likedPosts },
+    user: { _id: user_id, likedPosts, readingList },
   } = useSelector((state) => state.app);
-  const article = useSelector((state)=>{return state.app.allPosts[id]})
+  const article = useSelector((state) => {
+    return state.app.allPosts[id];
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -81,8 +84,17 @@ const Article = () => {
                   unlike={() => {
                     dispatch(actions.unlikeArticle(id));
                   }}
+                  likes={article.likes}
                 />
-                <div>{article.likes}</div>
+                <ReadingListButton
+                  inList={readingList.includes(article._id)}
+                  add={() => {
+                    dispatch(actions.addToReadingList(article._id));
+                  }}
+                  remove={() => {
+                    dispatch(actions.removeFromReadingList(article._id));
+                  }}
+                />
               </div>
             </div>
 
