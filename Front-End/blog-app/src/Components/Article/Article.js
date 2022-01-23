@@ -1,20 +1,22 @@
 // React
-import { useEffect } from "react";
+import { useEffect } from 'react';
 // React EditorJS
-import Blocks from "editorjs-blocks-react-renderer";
-import renderers from "./renderers";
+import Blocks from 'editorjs-blocks-react-renderer';
+import renderers from './renderers';
 // React Router
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 // React Redux
-import { useDispatch, useSelector } from "react-redux";
-import { appActions } from "../../Redux/Slices/app";
-import { userActions } from "../../Redux/Slices/user";
+import { useDispatch, useSelector } from 'react-redux';
+import { appActions } from '../../Redux/Slices/app';
+import { userActions } from '../../Redux/Slices/user';
 // Components
-import LikeButton from "../Buttons/LikeButton";
+import LikeButton from '../Buttons/LikeButton';
+// css
+import './article.css';
 
 const config = {
   image: {
-    className: "",
+    className: '',
   },
 };
 
@@ -42,11 +44,11 @@ const Article = () => {
   return (
     <>
       {article ? (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center article-container">
           <div className="md:w-1/2 mx-8 md:mx-0">
             <h1>{article.title}</h1>
-            <div>{article.summary}</div>
-            <div className="flex items-center gap-2">
+            <div className="article-summary">{article.summary}</div>
+            <div className="flex items-center gap-2 custom-article-info-container">
               <img
                 src={article.author.profilePicURL}
                 alt=""
@@ -56,9 +58,9 @@ const Article = () => {
               <div className="text-sm text-gray-600 flex gap-2 items-center">
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
                   {new Date(article.updatedAt).toLocaleDateString(undefined, {
-                    month: "short",
-                  })}{" "}
-                  {new Date(article.updatedAt).getDate()},{" "}
+                    month: 'short',
+                  })}{' '}
+                  {new Date(article.updatedAt).getDate()},{' '}
                   {new Date(article.updatedAt).getFullYear()}
                 </div>
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
@@ -69,7 +71,7 @@ const Article = () => {
                     className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
                     onClick={() => {
                       handleDelete();
-                      navigate("/");
+                      navigate('/');
                     }}
                   >
                     Delete
@@ -89,7 +91,7 @@ const Article = () => {
             </div>
 
             <div>
-              <img src={article.thumbnailURL} alt={""} />
+              <img src={article.thumbnailURL} alt={''} />
             </div>
 
             <div></div>
@@ -97,7 +99,7 @@ const Article = () => {
           </div>
         </div>
       ) : isLoading ? (
-        "...Loading"
+        '...Loading'
       ) : error ? (
         error
       ) : null}
