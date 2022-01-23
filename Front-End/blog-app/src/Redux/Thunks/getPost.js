@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const getPost = createAsyncThunk(
-  "app/article/get",
+  "GET ARTICLE",
   async (post_id, { getState, rejectWithValue }) => {
-    let article = getState().app.allPosts.find((post) => post._id === post_id);
+    let article = getState().app.allPosts[post_id];
     if (article) {
       return article;
     }

@@ -5,7 +5,7 @@ import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 // Redux
 import { useDispatch } from "react-redux";
-import { userActions } from "../../Redux/Slices/user";
+import { actions } from "../../Redux";
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -31,7 +31,7 @@ function ReactEditor() {
       articleBody,
       category: category.current.value,
     };
-    dispatch(userActions.postArticle(articleObj));
+    dispatch(actions.postArticle(articleObj));
   }, []);
 
   return (

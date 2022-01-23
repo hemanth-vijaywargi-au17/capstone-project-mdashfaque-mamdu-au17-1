@@ -4,14 +4,18 @@ import postArticle from "./postArticle";
 import deleteArticle from "./deleteArticle";
 import likeArticle from "./likeArticle";
 import unlikeArticle from "./unlikeArticle";
+import getPost from "./getPost";
+import getAllPosts from "./getAllPosts";
 
-const userThunks = {
+const Thunks = {
   getUser,
   logOut,
+  getPost,
+  getAllPosts,
   postArticle,
   deleteArticle,
   likeArticle,
   unlikeArticle,
 };
 
-export default userThunks;
+export default Thunks;

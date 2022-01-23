@@ -11,8 +11,7 @@ import Article from "./Components/Article/Article";
 import { ToastContainer } from "react-toastify";
 // Redux
 import { useDispatch } from "react-redux";
-import { userActions } from "./Redux/Slices/user";
-import { appActions } from "./Redux/Slices/app";
+import { actions } from "./Redux";
 // CSS
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,8 +19,8 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(userActions.getUser());
-    dispatch(appActions.getAllPosts());
+    dispatch(actions.getUser());
+    dispatch(actions.getAllPosts());
   }, []);
   return (
     <BrowserRouter>
