@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const unlikeArticle = createAsyncThunk(
-  "user/article/removeLike",
+export const likeArticle = createAsyncThunk(
+  "LIKE ARTICLE",
   async (post_id, { rejectWithValue }) => {
-    let { data } = await axios.post("/user/article/removeLike", {
+    let { data } = await axios.post("/user/article/like", {
       post_id: post_id,
     });
-    console.log(data);
+
     if (!data.error) {
       return post_id;
     } else {
@@ -16,4 +16,4 @@ export const unlikeArticle = createAsyncThunk(
   }
 );
 
-export default unlikeArticle;
+export default likeArticle;

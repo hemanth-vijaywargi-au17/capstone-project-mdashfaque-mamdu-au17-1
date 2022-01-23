@@ -7,7 +7,8 @@ function Home() {
 
   return (
     <div className="flex flex-col gap-2 items-center">
-      {allPosts.map((post) => {
+      {Object.keys(allPosts).map((key) => {
+        let post = allPosts[key]
         return (
           <ArticleCard
             {...post}

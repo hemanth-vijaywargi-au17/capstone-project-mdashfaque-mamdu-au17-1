@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-import cloudinaryUpload from "../../../../Utils/cloudinaryUpload";
+import cloudinaryUpload from "../../Utils/cloudinaryUpload";
 
 export const postArticle = createAsyncThunk(
-  "user/article/post",
+  "POST ARTICLE",
   async (articleObj, { getState, rejectWithValue }) => {
     const toastId = toast.loading("Posting...");
     const { file, title, summary, articleBody, category } = articleObj;
-    const _id = getState().user._id;
+    const _id = getState().app.user._id;
     const postObj = {
       title: title,
       summary: summary,

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const logOut = createAsyncThunk(
-  "user/logout",
+  "LOGOUT",
   async (_, { rejectWithValue }) => {
     let url = "/auth/logout";
     let { data } = await axios.get(url);

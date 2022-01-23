@@ -14,7 +14,7 @@ import { BsBookmarks } from "react-icons/bs";
 import "./navbar.css";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.app.user);
   const [isActive, setIsActive] = useState(false);
 
   const openSubmenu = (e) => {

@@ -14,7 +14,8 @@ function Authenticate(req, res, next) {
 userRoutes.use(Authenticate);
 
 userRoutes.post("/article/post", async (req, res) => {
-  const postObj = await Post.create(req.body);
+  const { _id } = await Post.create(req.body);
+  const postObj = await Post.findById(_id).populate("author");
   await User.updateOne(
     { _id: req.user._id },
     { $push: { createdPosts: postObj._id } }
