@@ -6,6 +6,8 @@ import likeArticle from "./likeArticle";
 import unlikeArticle from "./unlikeArticle";
 import getPost from "./getPost";
 import getAllPosts from "./getAllPosts";
+import addToReadingList from "./addToReadingList";
+import removeFromReadingList from "./removeFromReadingList";
 
 const Thunks = {
   getUser,
@@ -16,6 +18,8 @@ const Thunks = {
   deleteArticle,
   likeArticle,
   unlikeArticle,
+  addToReadingList,
+  removeFromReadingList,
 };
 
 export default Thunks;

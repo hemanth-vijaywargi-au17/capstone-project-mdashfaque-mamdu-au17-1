@@ -63,4 +63,28 @@ userRoutes.post("/article/removeLike", async (req, res) => {
   }
 });
 
+userRoutes.post("/article/readingList/add", async (req, res) => {
+  try {
+    let { post_id } = req.body;
+    await User.findByIdAndUpdate(req.user._id, {
+      $push: { readingList: post_id },
+    });
+    res.json({ error: false });
+  } catch (err) {
+    res.json({ error: true, errorObj: err });
+  }
+});
+
+userRoutes.post("/article/readingList/remove", async (req, res) => {
+  try {
+    let { post_id } = req.body;
+    await User.findByIdAndUpdate(req.user._id, {
+      $pull: { readingList: post_id },
+    });
+    res.json({ error: false });
+  } catch (err) {
+    res.json({ error: true, errorObj: err });
+  }
+});
+
 module.exports = userRoutes;
