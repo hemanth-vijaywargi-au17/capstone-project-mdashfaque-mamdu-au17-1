@@ -44,8 +44,8 @@ const Submenu = ({ isActive, setIsActive }) => {
           className="profile-picture-submenu"
         />
         <div className="name-email">
-          <h4>{user.name}</h4>
-          <p>{user.email}</p>
+          <h4 className="user-name">{user.name}</h4>
+          <p className="user-email">{user.email}</p>
         </div>
       </div>
       <div className="underline"></div>
