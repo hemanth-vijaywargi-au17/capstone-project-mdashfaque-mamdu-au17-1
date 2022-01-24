@@ -2,22 +2,22 @@
 import SignInButton from "./Buttons/SignInButton";
 import SignOutButton from "./Buttons/SignOutButton";
 // Redux
-import { userActions } from "../Redux/Slices/user";
+import { actions } from "../Redux";
 import { useDispatch, useSelector } from "react-redux";
 
 function SignIn() {
   const { name, email, profilePicURL, isLoading } = useSelector(
-    (state) => state.user
+    (state) => state.app.user
   );
 
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    dispatch(userActions.login("google"));
+    dispatch(actions.login("google"));
   };
 
   const handleSignOut = () => {
-    dispatch(userActions.logOut());
+    dispatch(actions.logOut());
   };
 
   return (

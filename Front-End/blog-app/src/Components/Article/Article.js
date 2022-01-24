@@ -6,9 +6,8 @@ import renderers from './renderers';
 // React Router
 import { useNavigate, useParams } from 'react-router-dom';
 // React Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { appActions } from '../../Redux/Slices/app';
-import { userActions } from '../../Redux/Slices/user';
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../Redux";
 // Components
 import LikeButton from '../Buttons/LikeButton';
 // css
@@ -23,22 +22,20 @@ const config = {
 const Article = () => {
   const { id } = useParams();
   const {
-    currentPost: article,
     isLoading,
     error,
+    user: { _id: user_id, likedPosts },
   } = useSelector((state) => state.app);
-  const { _id: user_id, likedPosts } = useSelector((state) => {
-    return state.user;
-  });
+  const article = useSelector((state)=>{return state.app.allPosts[id]})
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(appActions.getPost(id));
+    dispatch(actions.getPost(id));
   }, []);
 
   const handleDelete = () => {
-    dispatch(userActions.deleteArticle(id));
+    dispatch(actions.deleteArticle(id));
   };
 
   return (
@@ -80,10 +77,10 @@ const Article = () => {
                 <LikeButton
                   isLiked={likedPosts.includes(id)}
                   like={() => {
-                    dispatch(userActions.likeArticle(id));
+                    dispatch(actions.likeArticle(id));
                   }}
                   unlike={() => {
-                    dispatch(userActions.unlikeArticle(id));
+                    dispatch(actions.unlikeArticle(id));
                   }}
                 />
                 <div>{article.likes}</div>

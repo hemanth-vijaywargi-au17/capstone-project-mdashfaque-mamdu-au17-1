@@ -4,12 +4,12 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../Redux/Slices/user';
+import { actions } from '../../Redux';
 // CSS
 import './submenu.css';
 
 const Submenu = ({ isActive, setIsActive }) => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.app.user);
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ const Submenu = ({ isActive, setIsActive }) => {
         <button
           className="custom-links-profile sign-out-btn"
           onClick={() => {
-            dispatch(userActions.logOut());
+            dispatch(actions.logOut());
           }}
         >
           Sign Out
