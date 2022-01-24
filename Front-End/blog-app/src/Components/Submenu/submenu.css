@@ -1,5 +1,6 @@
-.name-email p {
+.name-email .user-email {
   color: #868e96;
+  font-size: 1rem;
 }
 .custom-menu {
   background: #ffffff;
@@ -34,14 +35,15 @@
   flex-direction: column;
 }
 
-.name-email h4 {
+.name-email .user-name {
   color: #212529;
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 0;
 }
-.name-email p {
-  margin-top: 0.4rem;
+.name-email .user-email {
+  /* margin-top: 0.3rem; */
+  margin-top: 0.1rem;
   margin-bottom: 0;
 }
 
