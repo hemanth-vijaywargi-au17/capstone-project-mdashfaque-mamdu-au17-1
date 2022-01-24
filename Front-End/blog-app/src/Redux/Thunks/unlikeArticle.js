@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const unlikeArticle = createAsyncThunk(
+const unlikeArticle = createAsyncThunk(
   "UNLIKE ARTICLE",
   async (post_id, { rejectWithValue }) => {
     let { data } = await axios.post("/user/article/removeLike", {

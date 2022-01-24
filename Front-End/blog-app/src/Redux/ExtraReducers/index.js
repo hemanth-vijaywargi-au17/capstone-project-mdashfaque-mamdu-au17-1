@@ -5,6 +5,8 @@ import getUser from "./getUser";
 import getPost from "./getPost";
 import addToReadingList from "./addToReadingList";
 import removeFromReadingList from "./removeFromReadingList";
+import follow from "./follow";
+import unfollow from "./unfollow";
 
 const ExtraReducers = {
   postArticle,
@@ -14,6 +16,8 @@ const ExtraReducers = {
   getPost,
   addToReadingList,
   removeFromReadingList,
+  follow,
+  unfollow,
 };
 
 export default ExtraReducers;

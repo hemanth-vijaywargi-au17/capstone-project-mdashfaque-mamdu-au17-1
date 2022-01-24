@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const deleteArticle = createAsyncThunk(
+const deleteArticle = createAsyncThunk(
   "DELETE ARTICLE",
   async (post_id, { rejectWithValue }) => {
     const toastId = toast.loading("Deleting...");

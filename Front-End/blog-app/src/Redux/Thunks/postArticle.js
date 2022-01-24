@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import cloudinaryUpload from "../../Utils/cloudinaryUpload";
 
-export const postArticle = createAsyncThunk(
+const postArticle = createAsyncThunk(
   "POST ARTICLE",
   async (articleObj, { getState, rejectWithValue }) => {
     const toastId = toast.loading("Posting...");

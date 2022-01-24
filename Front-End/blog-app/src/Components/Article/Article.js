@@ -1,10 +1,10 @@
 // React
-import { useEffect } from 'react';
+import { useEffect } from "react";
 // React EditorJS
-import Blocks from 'editorjs-blocks-react-renderer';
-import renderers from './renderers';
+import Blocks from "editorjs-blocks-react-renderer";
+import renderers from "./renderers";
 // React Router
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 // React Redux
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../Redux";
@@ -12,11 +12,12 @@ import { actions } from "../../Redux";
 import LikeButton from "../Buttons/LikeButton";
 import ReadingListButton from "../Buttons/ReadingListButton";
 // css
-import './article.css';
+import "./article.css";
+import FollowButton from "../Buttons/FollowButton";
 
 const config = {
   image: {
-    className: '',
+    className: "",
   },
 };
 
@@ -25,7 +26,7 @@ const Article = () => {
   const {
     isLoading,
     error,
-    user: { _id: user_id, likedPosts, readingList },
+    user: { _id: user_id, likedPosts, readingList, following },
   } = useSelector((state) => state.app);
   const article = useSelector((state) => {
     return state.app.allPosts[id];
@@ -58,9 +59,9 @@ const Article = () => {
               <div className="text-sm text-gray-600 flex gap-2 items-center">
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
                   {new Date(article.updatedAt).toLocaleDateString(undefined, {
-                    month: 'short',
-                  })}{' '}
-                  {new Date(article.updatedAt).getDate()},{' '}
+                    month: "short",
+                  })}{" "}
+                  {new Date(article.updatedAt).getDate()},{" "}
                   {new Date(article.updatedAt).getFullYear()}
                 </div>
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
@@ -71,7 +72,7 @@ const Article = () => {
                     className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
                     onClick={() => {
                       handleDelete();
-                      navigate('/');
+                      navigate("/");
                     }}
                   >
                     Delete
@@ -96,11 +97,32 @@ const Article = () => {
                     dispatch(actions.removeFromReadingList(article._id));
                   }}
                 />
+                {article.author._id !== user_id ? (
+                  <FollowButton
+                    isFollowing={following.includes(article.author._id)}
+                    follow={() => {
+                      dispatch(
+                        actions.follow({
+                          followee_id: article.author._id,
+                          name: article.author.name,
+                        })
+                      );
+                    }}
+                    unfollow={() => {
+                      dispatch(
+                        actions.unfollow({
+                          followee_id: article.author._id,
+                          name: article.author.name,
+                        })
+                      );
+                    }}
+                  />
+                ) : null}
               </div>
             </div>
 
             <div>
-              <img src={article.thumbnailURL} alt={''} />
+              <img src={article.thumbnailURL} alt={""} />
             </div>
 
             <div></div>
@@ -108,7 +130,7 @@ const Article = () => {
           </div>
         </div>
       ) : isLoading ? (
-        '...Loading'
+        "...Loading"
       ) : error ? (
         error
       ) : null}

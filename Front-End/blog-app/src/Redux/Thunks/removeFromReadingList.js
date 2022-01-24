@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const removeFromReadingList = createAsyncThunk(
+const removeFromReadingList = createAsyncThunk(
   "REMOVE FROM READING LIST",
   async (post_id, { rejectWithValue }) => {
     let { data } = await axios.post("/user/article/readingList/remove", {
