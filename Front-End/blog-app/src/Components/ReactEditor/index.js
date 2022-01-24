@@ -1,12 +1,13 @@
 // React
-import { useRef, useCallback } from "react";
+import { useRef, useCallback } from 'react';
 // React EditorJS
-import { createReactEditorJS } from "react-editor-js";
-import { EDITOR_JS_TOOLS } from "./constants";
+import { createReactEditorJS } from 'react-editor-js';
+import { EDITOR_JS_TOOLS } from './constants';
 // Redux
-import { useDispatch } from "react-redux";
-import { actions } from "../../Redux";
-
+import { useDispatch } from 'react-redux';
+import { actions } from '../../Redux';
+//css
+import './editor.css';
 const ReactEditorJS = createReactEditorJS();
 
 function ReactEditor() {
@@ -16,7 +17,7 @@ function ReactEditor() {
   const summary = useRef();
   const category = useRef();
   const dispatch = useDispatch();
-
+  console.log(title);
   const handleInitialize = useCallback((instance) => {
     editorCore.current = instance;
   }, []);
@@ -81,7 +82,6 @@ function ReactEditor() {
             required
           />
         </div>
-
         <div className="w-full">
           <ReactEditorJS
             tools={EDITOR_JS_TOOLS}
@@ -89,9 +89,10 @@ function ReactEditor() {
             onInitialize={handleInitialize}
           />
         </div>
-
-        <div className="flex justify-center my-2">
-          <button type="submit">Post</button>
+        <div className="flex justify-center my-2 ">
+          <button className={`publish-button`} type="submit">
+            Publish
+          </button>
         </div>
       </div>
     </form>
