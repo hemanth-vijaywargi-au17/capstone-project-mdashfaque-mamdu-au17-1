@@ -1,18 +1,19 @@
 import React from "react";
+import { AiFillLike, AiOutlineLike  } from "react-icons/ai";
 
 function LikeButton({ like, unlike, isLiked, likes }) {
   return (
     <>
       {isLiked ? (
-        <>
-          <button onClick={unlike}>Unlike</button>
-          <div>{likes}</div>
-        </>
+        <div onClick={unlike} className="flex items-center gap-1 cursor-pointer">
+          <AiFillLike size={"1.5rem"}/>
+          <span>{likes}</span>
+        </div>
       ) : (
-        <>
-          <button onClick={like}>Like</button>
-          <div>{likes}</div>
-        </>
+        <div onClick={like} className="flex items-center gap-1 cursor-pointer">
+          <AiOutlineLike size={"1.5rem"}/>
+          <span>{likes}</span>
+        </div>
       )}
     </>
   );
