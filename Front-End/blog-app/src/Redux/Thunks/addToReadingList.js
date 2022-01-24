@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const addToReadingList = createAsyncThunk(
+const addToReadingList = createAsyncThunk(
   "ADD TO READING LIST",
   async (post_id, { rejectWithValue }) => {
     let { data } = await axios.post("/user/article/readingList/add", {

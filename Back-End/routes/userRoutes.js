@@ -87,4 +87,36 @@ userRoutes.post("/article/readingList/remove", async (req, res) => {
   }
 });
 
+userRoutes.post("/follow", async (req, res) => {
+  try {
+    let follower_id = req.user._id;
+    let followee_id = req.body.followee_id;
+    await User.findByIdAndUpdate(follower_id, {
+      $push: { following: followee_id },
+    });
+    await User.findByIdAndUpdate(followee_id, {
+      $push: { followers: follower_id },
+    });
+    res.json({ error: false });
+  } catch (err) {
+    res.json({ error: true, errorObj: err });
+  }
+});
+
+userRoutes.post("/unfollow", async (req, res) => {
+  try {
+    let follower_id = req.user._id;
+    let followee_id = req.body.followee_id;
+    await User.findByIdAndUpdate(follower_id, {
+      $pull: { following: followee_id },
+    });
+    await User.findByIdAndUpdate(followee_id, {
+      $pull: { followers: follower_id },
+    });
+    res.json({ error: false });
+  } catch (err) {
+    res.json({ error: true, errorObj: err });
+  }
+});
+
 module.exports = userRoutes;
