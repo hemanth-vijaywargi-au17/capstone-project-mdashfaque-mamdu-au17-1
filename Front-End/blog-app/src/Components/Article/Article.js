@@ -1,23 +1,23 @@
 // React
-import { useEffect } from "react";
+import { useEffect } from 'react';
 // React EditorJS
-import Blocks from "editorjs-blocks-react-renderer";
-import renderers from "./renderers";
+import Blocks from 'editorjs-blocks-react-renderer';
+import renderers from './renderers';
 // React Router
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 // React Redux
-import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../Redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '../../Redux';
 // Components
-import LikeButton from "../Buttons/LikeButton";
-import ReadingListButton from "../Buttons/ReadingListButton";
+import LikeButton from '../Buttons/LikeButton';
+import ReadingListButton from '../Buttons/ReadingListButton';
 // css
-import "./article.css";
-import FollowButton from "../Buttons/FollowButton";
+import './article.css';
+import FollowButton from '../Buttons/FollowButton';
 
 const config = {
   image: {
-    className: "",
+    className: '',
   },
 };
 
@@ -59,9 +59,9 @@ const Article = () => {
               <div className="text-sm text-gray-600 flex gap-2 items-center">
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
                   {new Date(article.updatedAt).toLocaleDateString(undefined, {
-                    month: "short",
-                  })}{" "}
-                  {new Date(article.updatedAt).getDate()},{" "}
+                    month: 'short',
+                  })}{' '}
+                  {new Date(article.updatedAt).getDate()},{' '}
                   {new Date(article.updatedAt).getFullYear()}
                 </div>
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
@@ -72,7 +72,7 @@ const Article = () => {
                     className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
                     onClick={() => {
                       handleDelete();
-                      navigate("/");
+                      navigate('/');
                     }}
                   >
                     Delete
@@ -122,7 +122,7 @@ const Article = () => {
             </div>
 
             <div>
-              <img src={article.thumbnailURL} alt={""} />
+              <img src={article.thumbnailURL} alt={''} />
             </div>
 
             <div></div>
@@ -130,7 +130,7 @@ const Article = () => {
           </div>
         </div>
       ) : isLoading ? (
-        "...Loading"
+        '...Loading'
       ) : error ? (
         error
       ) : null}
