@@ -130,7 +130,7 @@ const Article = () => {
           </div>
         </div>
       ) : isLoading ? (
-        '...Loading'
+        <h2 className="loading-component pulsate-bck">Loading...</h2>
       ) : error ? (
         error
       ) : null}
