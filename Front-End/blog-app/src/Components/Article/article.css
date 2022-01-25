@@ -34,6 +34,17 @@
   letter-spacing: -0.011em;
 }
 
+.article-container a:link {
+  color: rgba(41, 41, 41, 1);
+}
+
+.article-container a:visited {
+  color: rgba(41, 41, 41, 1);
+}
+
+.article-container a:hover {
+  text-decoration: none;
+}
 /* Media queries */
 @media screen and (max-width: 600px) {
   .article-summary {
