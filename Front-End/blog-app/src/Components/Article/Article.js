@@ -17,12 +17,6 @@ import DropDownMenu from "../DropDownMenu";
 import "./article.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const config = {
-  image: {
-    className: "w-full",
-  },
-};
-
 const Article = () => {
   const { id } = useParams();
 
@@ -149,7 +143,7 @@ const Article = () => {
 
             <img src={article.thumbnailURL} alt={""} className="w-full border-2 border-gray-200 border-x-0 border-solid" />
 
-            <Blocks data={article.body} renderers={renderers} config={config} />
+            <Blocks data={article.body} renderers={renderers} />
           </div>
         </div>
       ) : isLoading ? (
