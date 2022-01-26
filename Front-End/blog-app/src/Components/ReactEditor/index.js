@@ -36,7 +36,7 @@ function ReactEditor() {
   }, []);
 
   return (
-    <form className="w-full flex justify-center" onSubmit={handleSave}>
+    <form className="w-full flex justify-center mt-4" onSubmit={handleSave}>
       <div className="mx-8 md:mx-0 md:w-2/3 flex flex-col items-center gap-2">
         <h1>Write an Article</h1>
         <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 w-fit text-center">

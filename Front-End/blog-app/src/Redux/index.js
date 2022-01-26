@@ -17,13 +17,17 @@ const appSlice = createSlice({
       _id: null,
     },
     allPosts: {},
+    allUsers: {},
     isLoading: false,
-    error: "",
+    error: false,
   },
   reducers: {
     login: (state, action) => {
       const provider = action.payload;
       window.open(`http://localhost:5000/auth/${provider}`, "_self");
+    },
+    clearError: (state, action) => {
+      state.error = false;
     },
   },
   extraReducers: (builder) => {
@@ -71,18 +75,41 @@ const appSlice = createSlice({
       }, state.allPosts);
     });
 
+    builder.addCase(Thunks.getAllUsers.fulfilled, (state, action) => {
+      state.allUsers = action.payload.reduce((prev, curr) => {
+        let newObj = { ...prev };
+        newObj[curr._id] = curr;
+        return newObj;
+      }, state.allUsers);
+    });
+
     builder.addCase(Thunks.getPost.pending, ExtraReducers.getPost.pending);
     builder.addCase(Thunks.getPost.fulfilled, ExtraReducers.getPost.fulfilled);
     builder.addCase(Thunks.getPost.rejected, ExtraReducers.getPost.rejected);
 
-    builder.addCase(Thunks.addToReadingList.fulfilled, ExtraReducers.addToReadingList.fulfilled);
-    builder.addCase(Thunks.addToReadingList.rejected, ExtraReducers.addToReadingList.rejected);
+    builder.addCase(
+      Thunks.addToReadingList.fulfilled,
+      ExtraReducers.addToReadingList.fulfilled
+    );
+    builder.addCase(
+      Thunks.addToReadingList.rejected,
+      ExtraReducers.addToReadingList.rejected
+    );
 
-    builder.addCase(Thunks.removeFromReadingList.fulfilled, ExtraReducers.removeFromReadingList.fulfilled);
-    builder.addCase(Thunks.removeFromReadingList.rejected, ExtraReducers.removeFromReadingList.rejected);
+    builder.addCase(
+      Thunks.removeFromReadingList.fulfilled,
+      ExtraReducers.removeFromReadingList.fulfilled
+    );
+    builder.addCase(
+      Thunks.removeFromReadingList.rejected,
+      ExtraReducers.removeFromReadingList.rejected
+    );
 
     builder.addCase(Thunks.follow.fulfilled, ExtraReducers.follow.fulfilled);
-    builder.addCase(Thunks.unfollow.fulfilled, ExtraReducers.unfollow.fulfilled);
+    builder.addCase(
+      Thunks.unfollow.fulfilled,
+      ExtraReducers.unfollow.fulfilled
+    );
 
     builder.addCase(Thunks.follow.rejected, ExtraReducers.follow.rejected);
     builder.addCase(Thunks.unfollow.rejected, ExtraReducers.unfollow.rejected);

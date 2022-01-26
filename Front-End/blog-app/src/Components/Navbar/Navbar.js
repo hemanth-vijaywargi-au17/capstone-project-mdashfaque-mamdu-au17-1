@@ -1,9 +1,9 @@
 // React
 import React, { useState } from "react";
 // Components
-import Submenu from "../Submenu/Submenu";
+import DropDownMenu from "../DropDownMenu";
 // Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // React Router
 import { Link } from "react-router-dom";
 // React Icons
@@ -12,17 +12,14 @@ import { BsSearch } from "react-icons/bs";
 import { BsBookmarks } from "react-icons/bs";
 // CSS
 import "./navbar.css";
+import { actions } from "../../Redux";
 
 const Navbar = () => {
   const user = useSelector((state) => state.app.user);
-  const [isActive, setIsActive] = useState(false);
-
-  const openSubmenu = (e) => {
-    setIsActive(!isActive);
-  };
+  const dispatch = useDispatch();
 
   return (
-    <div className="blog__navbar">
+    <div className="blog__navbar px-10 lg:px-28 py-4 shadow-lg">
       <div className="blog__navbar-links">
         <div className="blog__navbar-links__logo">
           <Link to="/">
@@ -54,17 +51,43 @@ const Navbar = () => {
             )}
 
             {user.profilePicURL ? (
-              <>
-                <img
-                  className="profile-picture"
-                  src={`${user.profilePicURL}`}
-                  alt={`${user.name}`}
-                  onClick={openSubmenu}
-                />
-                {isActive && (
-                  <Submenu isActive={isActive} setIsActive={setIsActive} />
-                )}
-              </>
+              <DropDownMenu
+                menuButton={
+                  <img
+                    className="profile-picture"
+                    src={`${user.profilePicURL}`}
+                    alt={`${user.name}`}
+                  />
+                }
+              >
+                <div className="profile-info">
+                  <h4 className="">{user.name}</h4>
+                  <p className="">{user.email}</p>
+                </div>
+                <div className="underline"></div>
+                <div className="user-info">
+                  <Link className="custom-links-profile" to="/write">
+                    Write a story
+                  </Link>
+
+                  <Link className="custom-links-profile" to="/profile">
+                    Design your profile
+                  </Link>
+
+                  <Link className="custom-links-profile" to="/Help">
+                    Help
+                  </Link>
+
+                  <button
+                    className="custom-links-profile sign-out-btn"
+                    onClick={() => {
+                      dispatch(actions.logOut());
+                    }}
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </DropDownMenu>
             ) : (
               <Link to="/signin">
                 <button className="get-started-btn" type="button">

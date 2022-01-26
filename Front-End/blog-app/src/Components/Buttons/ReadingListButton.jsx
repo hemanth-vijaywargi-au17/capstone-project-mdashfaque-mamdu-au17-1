@@ -1,24 +1,24 @@
 import React from "react";
 import { BsBookmarkFill, BsBookmark } from "react-icons/bs";
 
-function ReadingListButton({ inList, remove, add }) {
+function ReadingListButton({ inList, remove, add, label }) {
   return (
     <>
       {inList ? (
         <div
           onClick={remove}
-          className="flex items-center cursor-pointer  gap-2 text-xs"
+          className="article-btn"
         >
-          <BsBookmarkFill size={"1.5rem"} />
-          <span>Remove from Reading List</span>
+          <BsBookmarkFill size={"1.3rem"} />
+          {label?<span className="hidden sm:block">Remove from Reading List</span>:null}
         </div>
       ) : (
         <div
           onClick={add}
-          className="flex items-center cursor-pointer  gap-2 text-xs"
+          className="article-btn"
         >
-          <BsBookmark size={"1.5rem"} />
-          <span>Add To Reading List</span>
+          <BsBookmark size={"1.3rem"} />
+          {label?<span className="hidden sm:block">Add To Reading List</span>:null}
         </div>
       )}
     </>

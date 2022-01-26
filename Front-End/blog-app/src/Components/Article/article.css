@@ -5,10 +5,6 @@
   line-height: 1.5;
 }
 
-.custom-article-info-container {
-  margin-bottom: 1.5rem;
-}
-
 .article-container p,
 .article-container li {
   font-size: 1.313rem;
@@ -19,7 +15,9 @@
 .article-container b {
   color: #212529;
 }
-
+.article-container img{
+  max-width: 100%;
+}
 .article-container h1:first-child {
   font-size: 3rem;
   line-height: 3.75rem;

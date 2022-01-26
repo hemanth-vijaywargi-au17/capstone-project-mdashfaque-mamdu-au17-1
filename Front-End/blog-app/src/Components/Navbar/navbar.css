@@ -1,18 +1,15 @@
 .blog__navbar {
   position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: white;
-  width: 80%;
-  margin: 0 auto;
-  padding: 1rem 0.5rem;
+  margin: 0;
 }
 
 .blog__brand {
   font-weight: bold;
   font-size: 2rem;
 }
+
 .blog__navbar a {
   text-decoration: none;
   color: black;
@@ -20,8 +17,8 @@
 
 .main-body {
   position: relative;
-  width: 100%;
 }
+
 .blog__navbar-links {
   flex: 1;
   display: flex;
@@ -43,6 +40,7 @@
   justify-content: space-between;
   gap: 1.5rem;
 }
+
 .blog__navbar-links-container {
   display: flex;
   justify-content: flex-start;
@@ -88,9 +86,63 @@
   transition: box-shadow 0.4s ease;
 }
 
-profile-picture:hover {
+.profile-picture:hover {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
+
+.name-email .user-email {
+  color: #868e96;
+  font-size: 1rem;
+}
+
+
+
+.name-email .user-name {
+  color: #212529;
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.name-email .user-email {
+  margin-top: 0.3rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0;
+}
+
+
+
+.underline {
+  height: 0.05rem;
+  background-color: #e9ecef;
+  margin: 1.5rem 0;
+}
+
+.custom-links-profile {
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.user-info .custom-links-profile {
+  color: #495057;
+}
+
+.custom-links-profile:hover {
+  color: black;
+}
+
+.sign-out-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 0;
+}
+
 @media screen and (max-width: 750px) {
   .blog__navbar-links-container {
     display: none;
@@ -103,6 +155,7 @@ profile-picture:hover {
   .blog__navbar-get-started {
     gap: 0.5rem;
   }
+
   .get-started-btn {
     padding: 0.5rem 0.8rem;
   }
@@ -110,9 +163,9 @@ profile-picture:hover {
 
 @media screen and (max-width: 550px) {
   .blog__navbar {
-    width: 90% !important;
     margin: 0 auto;
   }
+
   .blog__navbar-get-started .link {
     display: none;
   }

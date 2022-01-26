@@ -1,15 +1,21 @@
 const { Router } = require("express");
 const appRoutes = Router();
 const Post = require("../models/Post");
+const User = require("../models/User");
+
+appRoutes.get("/getAllUsers", async (req, res) => {
+  const allUsers = await User.find({});
+  res.json(allUsers);
+});
 
 appRoutes.get("/getAllPosts", async (req, res) => {
-  const allPosts = await Post.find({}).populate("author");
+  const allPosts = await Post.find({});
   res.json(allPosts);
 });
 
 appRoutes.post("/getPost", async (req, res) => {
   const { post_id } = req.body;
-  const response = await Post.find({ _id: post_id }).populate("author");
+  const response = await Post.find({ _id: post_id });
   if (response.length !== 0) {
     res.json(response[0]);
   } else {
