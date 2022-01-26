@@ -1,13 +1,13 @@
 // React
-import { useEffect } from "react";
+import { useEffect } from 'react';
 // React EditorJS
-import Blocks from "editorjs-blocks-react-renderer";
-import renderers from "./renderers";
+import Blocks from 'editorjs-blocks-react-renderer';
+import renderers from './renderers';
 // React Router
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 // React Redux
-import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../Redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '../../Redux';
 // Components
 import LikeButton from "../Buttons/LikeButton";
 import ReadingListButton from "../Buttons/ReadingListButton";
@@ -16,6 +16,7 @@ import DropDownMenu from "../DropDownMenu";
 // css
 import "./article.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
+
 
 const Article = () => {
   const { id } = useParams();
@@ -92,12 +93,25 @@ const Article = () => {
               <div className="text-sm text-gray-600 flex gap-2 items-center border-none lg:border-2 lg:border-y-0 lg:border-r-0 lg:pl-2 border-gray-300 lg:border-solid">
                 <div className="bg-gray-100 rounded-lg p-1 px-2 text-sm">
                   {new Date(article.updatedAt).toLocaleDateString(undefined, {
-                    month: "short",
-                  })}{" "}
-                  {new Date(article.updatedAt).getDate()},{" "}
+                    month: 'short',
+                  })}{' '}
+                  {new Date(article.updatedAt).getDate()},{' '}
                   {new Date(article.updatedAt).getFullYear()}
                 </div>
-
+                <div className="bg-gray-100 rounded-lg p-1 px-2">
+                  {article.tags.length !== 0 ? article.tags[0] : null}
+                </div>
+                {user_id === article.author._id ? (
+                  <div
+                    className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
+                    onClick={() => {
+                      handleDelete();
+                      navigate('/');
+                    }}
+                  >
+                    Delete
+                  </div>
+                ) : null}
                 <LikeButton
                   isLiked={currentUser.likedPosts.includes(id)}
                   like={() => {
@@ -142,12 +156,12 @@ const Article = () => {
             </div>
 
             <img src={article.thumbnailURL} alt={""} className="w-full border-2 border-gray-200 border-x-0 border-solid" />
-
+              
             <Blocks data={article.body} renderers={renderers} />
           </div>
         </div>
       ) : isLoading ? (
-        "...Loading"
+        <h2 className="loading-component pulsate-bck">Loading...</h2>
       ) : error ? (
         "Sorry, this article does not exist or It was removed by the author."
       ) : null}

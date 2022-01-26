@@ -1,0 +1,18 @@
+.publish-button {
+  font-size: 1rem;
+  padding: 0.6em 1.2em;
+  border-radius: 1.5rem;
+  background-color: #40c057;
+  color: #ebfbee;
+  border: none;
+  cursor: pointer;
+}
+
+.publish-button:hover {
+  background-color: #2b8a3e;
+}
+
+.btn-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
