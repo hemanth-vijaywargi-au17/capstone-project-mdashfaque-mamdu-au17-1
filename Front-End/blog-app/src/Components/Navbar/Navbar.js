@@ -19,7 +19,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="blog__navbar">
+    <div className="blog__navbar px-10 lg:px-28 py-4 shadow-lg">
       <div className="blog__navbar-links">
         <div className="blog__navbar-links__logo">
           <Link to="/">

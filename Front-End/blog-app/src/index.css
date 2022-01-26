@@ -1,9 +1,16 @@
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 
-img{
-  max-width: 100%;
+.article-btn{
+  @apply flex items-center cursor-pointer  gap-2 text-xs shadow bg-gray-100 rounded-lg p-1 px-2 w-fit text-gray-800 hover:bg-gray-200 active:outline outline-1 outline-gray-500 active:shadow-lg;
+}
+h1{
+  @apply text-2xl md:text-3xl;
+}
+
+p{
+  @apply text-base leading-7 md:text-lg text-gray-800 font-sans tracking-wider;
 }
 
 body {

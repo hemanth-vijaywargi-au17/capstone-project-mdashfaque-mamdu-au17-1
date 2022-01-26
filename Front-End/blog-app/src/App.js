@@ -20,6 +20,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actions.getUser());
+    dispatch(actions.getAllUsers());
     dispatch(actions.getAllPosts());
   }, []);
   return (

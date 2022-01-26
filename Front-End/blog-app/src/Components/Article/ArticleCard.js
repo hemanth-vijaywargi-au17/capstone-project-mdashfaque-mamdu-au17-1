@@ -7,7 +7,16 @@ import { actions } from "../../Redux";
 import ReadingListButton from "../Buttons/ReadingListButton";
 
 function ArticleCard(props) {
-  const { author, title, summary, thumbnailURL, tags, date, _id } = props;
+  const {
+    author: author_id,
+    title,
+    summary,
+    thumbnailURL,
+    tags,
+    date,
+    _id,
+  } = props;
+  const author = useSelector((state) => state.app.allUsers[author_id]);
   const {
     user: { readingList },
   } = useSelector((state) => state.app);
@@ -18,7 +27,7 @@ function ArticleCard(props) {
     /* Article Card */
     <div
       className="
-      grid w-full p-4 gap-2 font-sans cursor-pointer border-b-2 border-gray-200 active:bg-gray-100
+      grid w-full p-4 gap-2 font-sans cursor-pointer border-b-2 border-x-0 border-t-0 border-solid  border-gray-200 active:bg-gray-100 box-border
       sm:grid-cols-3 md:gap-4 md:w-11/12 lg:w-4/6 xl:w-3/6"
       onClick={() => {
         navigate(`/article/${_id}`);
@@ -49,7 +58,7 @@ function ArticleCard(props) {
             alt=""
             className="w-6 h-6 rounded-full"
           />
-          <div className="text-sm font-semibold">{author.name}</div>
+          <div className="text-sm font-semibold capitalize">{author.name}</div>
         </div>
         {/* Title */}
         <div className="font-bold text-lg sm:text-xl md:text-2xl">{title}</div>

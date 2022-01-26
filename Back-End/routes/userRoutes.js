@@ -15,7 +15,7 @@ userRoutes.use(Authenticate);
 
 userRoutes.post("/article/post", async (req, res) => {
   const { _id } = await Post.create(req.body);
-  const postObj = await Post.findById(_id).populate("author");
+  const postObj = await Post.findById(_id);
   await User.updateOne(
     { _id: req.user._id },
     { $push: { createdPosts: postObj._id } }
@@ -41,7 +41,7 @@ userRoutes.post("/article/like", async (req, res) => {
   try {
     let { post_id } = req.body;
     await User.findByIdAndUpdate(req.user._id, {
-      $push: { likedPosts: post_id },
+      $addToSet: { likedPosts: post_id },
     });
     await Post.findByIdAndUpdate(post_id, { $inc: { likes: 1 } });
     res.json({ error: false });
@@ -67,7 +67,7 @@ userRoutes.post("/article/readingList/add", async (req, res) => {
   try {
     let { post_id } = req.body;
     await User.findByIdAndUpdate(req.user._id, {
-      $push: { readingList: post_id },
+      $addToSet: { readingList: post_id },
     });
     res.json({ error: false });
   } catch (err) {
@@ -92,10 +92,10 @@ userRoutes.post("/follow", async (req, res) => {
     let follower_id = req.user._id;
     let followee_id = req.body.followee_id;
     await User.findByIdAndUpdate(follower_id, {
-      $push: { following: followee_id },
+      $addToSet: { following: followee_id },
     });
     await User.findByIdAndUpdate(followee_id, {
-      $push: { followers: follower_id },
+      $addToSet: { followers: follower_id },
     });
     res.json({ error: false });
   } catch (err) {

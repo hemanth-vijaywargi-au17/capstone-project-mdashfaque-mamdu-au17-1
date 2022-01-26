@@ -6,17 +6,17 @@ function FollowButton({ isFollowing, followers, follow, unfollow }) {
   {isFollowing ? (
     <div
       onClick={unfollow}
-      className="flex items-center cursor-pointer  gap-2 text-xs shadow p-2"
+      className="article-btn"
     >
       <RiUserFill size={"1.3rem"} />
-      <span>Unfollow</span>
+      <span>Following</span>
       <span>{followers}</span>
     </div>
   ) : (
     <div
       onClick={follow}
-      className="flex items-center cursor-pointer  gap-2 text-xs shadow p-2"
-    >
+      className="article-btn"
+   >
       <RiUserLine size={"1.3rem"} />
       <span>Follow</span>
       <span>{followers}</span>

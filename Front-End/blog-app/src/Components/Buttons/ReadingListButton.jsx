@@ -7,18 +7,18 @@ function ReadingListButton({ inList, remove, add, label }) {
       {inList ? (
         <div
           onClick={remove}
-          className="flex items-center cursor-pointer  gap-2 text-xs shadow p-2"
+          className="article-btn"
         >
-          <BsBookmarkFill size={"1rem"} />
-          {label?<span>Remove from Reading List</span>:null}
+          <BsBookmarkFill size={"1.3rem"} />
+          {label?<span className="hidden sm:block">Remove from Reading List</span>:null}
         </div>
       ) : (
         <div
           onClick={add}
-          className="flex items-center cursor-pointer  gap-2 text-xs shadow p-2"
+          className="article-btn"
         >
-          <BsBookmark size={"1rem"} />
-          {label?<span>Add To Reading List</span>:null}
+          <BsBookmark size={"1.3rem"} />
+          {label?<span className="hidden sm:block">Add To Reading List</span>:null}
         </div>
       )}
     </>

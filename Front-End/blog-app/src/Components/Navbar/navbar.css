@@ -1,12 +1,8 @@
 .blog__navbar {
   position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: white;
-  width: 80%;
-  margin: 0 auto;
-  padding: 1rem 0.5rem;
+  margin: 0;
 }
 
 .blog__brand {
@@ -21,7 +17,6 @@
 
 .main-body {
   position: relative;
-  width: 100%;
 }
 
 .blog__navbar-links {
@@ -168,7 +163,6 @@
 
 @media screen and (max-width: 550px) {
   .blog__navbar {
-    width: 90% !important;
     margin: 0 auto;
   }
 

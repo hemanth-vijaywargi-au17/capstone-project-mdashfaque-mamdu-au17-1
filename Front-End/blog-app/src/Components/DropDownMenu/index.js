@@ -37,7 +37,7 @@ const DropDownMenu = ({ children, menuButton }) => {
 
       <div
         ref={dropdownRef}
-        className="absolute shadow p-2 rounded right-0 bg-white mt-2"
+        className="absolute shadow-lg p-2 rounded right-0 bg-white mt-2"
         style={{ display: isActive ? "block" : "none" }}
       >
         {children}
