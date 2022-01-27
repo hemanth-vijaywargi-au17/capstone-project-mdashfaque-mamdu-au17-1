@@ -6,7 +6,7 @@ const CommentSchema = Schema(
     author_id: { type: Schema.Types.ObjectId, required: true, ref: "User" },
     likes: { type: Schema.Types.Number, required: true },
     replies: { type: [Schema.Types.ObjectId], ref: "Comment" },
-    post_id: { type: [Schema.Types.ObjectId], ref: "Post" },
+    post_id: { type: Schema.Types.ObjectId, ref: "Post" },
   },
   { timestamps: true }
 );

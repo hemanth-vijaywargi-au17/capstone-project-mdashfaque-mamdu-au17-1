@@ -3,6 +3,7 @@ const cookieSession = require("cookie-session");
 const express = require("express");
 const passport = require("passport");
 require("dotenv").config();
+const { resolve } = require("path");
 const passportSetup = require("./passport.js");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
@@ -32,6 +33,15 @@ app.use("/app", appRoutes);
 // DB
 const { dbConnect } = require("./db");
 dbConnect();
+
+// Statically Serving Build Folder
+const buildFolderPath = resolve(__dirname, "../Front-End/blog-app/build");
+app.use(express.static(buildFolderPath));
+
+//React Router
+app.get("*", (req, res) => {
+  res.sendFile(`${buildFolderPath}/index.html`);
+});
 
 // Starting the express server
 app.listen(PORT, () => {
