@@ -3,7 +3,10 @@ const authRoutes = Router();
 const passport = require("passport");
 const User = require("../models/User");
 
-const CLIENT_URL = "http://localhost:3000/";
+let CLIENT_URL = "/";
+if (process.env.NODE_ENV === "development") {
+  CLIENT_URL = "http://localhost:3000";
+}
 
 // Google Login Route
 authRoutes.get(
