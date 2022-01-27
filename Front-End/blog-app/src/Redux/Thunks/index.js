@@ -11,6 +11,8 @@ import removeFromReadingList from "./removeFromReadingList";
 import follow from './follow'
 import unfollow from './unfollow'
 import getAllUsers from './getAllUsers'
+import addComment from './addComment'
+import removeComment from './removeComment'
 
 const Thunks = {
   getUser,
@@ -26,6 +28,8 @@ const Thunks = {
   follow,
   unfollow,
   getAllUsers,
+  addComment,
+  removeComment,
 };
 
 export default Thunks;

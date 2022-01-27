@@ -2,6 +2,7 @@ const { Router } = require("express");
 const userRoutes = Router();
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 
 function Authenticate(req, res, next) {
   if (req.isAuthenticated() && req.user) {
@@ -112,6 +113,31 @@ userRoutes.post("/unfollow", async (req, res) => {
     });
     await User.findByIdAndUpdate(followee_id, {
       $pull: { followers: follower_id },
+    });
+    res.json({ error: false });
+  } catch (err) {
+    res.json({ error: true, errorObj: err });
+  }
+});
+
+userRoutes.post("/comment/add", async (req, res) => {
+  try {
+    const { post_id, comment } = req.body;
+    const commentObj = await Comment.create(comment);
+    await Post.findByIdAndUpdate(post_id, {
+      $push: { comments: commentObj._id },
+    });
+    res.json({ error: false, commentObj: commentObj });
+  } catch (err) {
+    res.json({ error: true, errorObj: err });
+  }
+});
+
+userRoutes.post("/comment/remove", async (req, res) => {
+  try {
+    const { post_id, comment_id } = req.body;
+    await Post.findByIdAndUpdate(post_id, {
+      $pull: { comments: comment_id },
     });
     res.json({ error: false });
   } catch (err) {

@@ -113,6 +113,13 @@ const appSlice = createSlice({
 
     builder.addCase(Thunks.follow.rejected, ExtraReducers.follow.rejected);
     builder.addCase(Thunks.unfollow.rejected, ExtraReducers.unfollow.rejected);
+
+    builder.addCase(Thunks.addComment.fulfilled, ExtraReducers.addComment.fulfilled);
+    builder.addCase(Thunks.addComment.rejected, ExtraReducers.addComment.rejected);
+
+    builder.addCase(Thunks.removeComment.fulfilled, ExtraReducers.removeComment.fulfilled);
+    builder.addCase(Thunks.removeComment.rejected, ExtraReducers.removeComment.rejected);
+
   },
 });
 
