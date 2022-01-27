@@ -1,6 +1,5 @@
 // Components
-import SignInButton from "./Buttons/SignInButton";
-import SignOutButton from "./Buttons/SignOutButton";
+import GoogleSignInButton from "./Buttons/GoogleSignInButton";
 // Redux
 import { actions } from "../Redux";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,10 +34,18 @@ function SignIn() {
               />
               <div className="text-xl">{name}</div>
               <div className="text-xl">{email}</div>
-              <SignOutButton method={handleSignOut} />
+              <GoogleSignInButton
+                signin={handleSignIn}
+                signout={handleSignOut}
+                isSignedIn={name !== null}
+              />
             </>
           ) : (
-            <SignInButton method={handleSignIn} name="Google" />
+            <GoogleSignInButton
+              signin={handleSignIn}
+              signout={handleSignOut}
+              isSignedIn={name !== null}
+            />
           )}
         </>
       )}
