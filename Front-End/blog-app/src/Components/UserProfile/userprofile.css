@@ -1,0 +1,52 @@
+.container__user__profile {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.user__name {
+  font-size: 1.6rem;
+  padding: 1.3em 0;
+  color: #212529;
+}
+
+.follow__btn {
+  margin-top: 0;
+  font-size: 1rem;
+  padding: 0.6em 1.2em;
+  border-radius: 1.5rem;
+  background-color: #40c057;
+  color: #ebfbee;
+  border: none;
+  cursor: pointer;
+}
+
+.follow__btn:hover {
+  background-color: #2b8a3e;
+}
+
+.profile__info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.number__followers {
+  color: #868e96;
+}
+
+.number__followers:hover {
+  color: #212529;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  .container__user__profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    width: 70%;
+    margin: 0 auto;
+  }
+}
