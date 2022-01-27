@@ -9,14 +9,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../Redux';
 // Components
-import LikeButton from "../Buttons/LikeButton";
-import ReadingListButton from "../Buttons/ReadingListButton";
-import FollowButton from "../Buttons/FollowButton";
-import DropDownMenu from "../DropDownMenu";
+import LikeButton from '../Buttons/LikeButton';
+import ReadingListButton from '../Buttons/ReadingListButton';
+import FollowButton from '../Buttons/FollowButton';
+import DropDownMenu from '../DropDownMenu';
 // css
-import "./article.css";
-import { BsThreeDotsVertical } from "react-icons/bs";
-
+import './article.css';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
 const Article = () => {
   const { id } = useParams();
@@ -30,7 +29,6 @@ const Article = () => {
     error,
     user: currentUser,
   } = useSelector((state) => state.app);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,7 +38,6 @@ const Article = () => {
       dispatch(actions.clearError());
     };
   }, []);
-
   const handleDelete = () => {
     dispatch(actions.deleteArticle(id));
   };
@@ -101,7 +98,7 @@ const Article = () => {
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
                   {article.tags.length !== 0 ? article.tags[0] : null}
                 </div>
-                {user_id === article.author._id ? (
+                {currentUser._id === article.author._id ? (
                   <div
                     className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
                     onClick={() => {
@@ -137,14 +134,14 @@ const Article = () => {
                     menuButton={
                       <BsThreeDotsVertical
                         className="cursor-pointer p-1 shadow"
-                        size={"1.3rem"}
+                        size={'1.3rem'}
                       />
                     }
                   >
                     <div
                       onClick={() => {
                         handleDelete();
-                        navigate("/");
+                        navigate('/');
                       }}
                       className="cursor-pointer hover:bg-gray-200 p-2"
                     >
@@ -155,15 +152,19 @@ const Article = () => {
               </div>
             </div>
 
-            <img src={article.thumbnailURL} alt={""} className="w-full border-2 border-gray-200 border-x-0 border-solid" />
-              
+            <img
+              src={article.thumbnailURL}
+              alt={''}
+              className="w-full border-2 border-gray-200 border-x-0 border-solid"
+            />
+
             <Blocks data={article.body} renderers={renderers} />
           </div>
         </div>
       ) : isLoading ? (
         <h2 className="loading-component pulsate-bck">Loading...</h2>
       ) : error ? (
-        "Sorry, this article does not exist or It was removed by the author."
+        'Sorry, this article does not exist or It was removed by the author.'
       ) : null}
     </>
   );
