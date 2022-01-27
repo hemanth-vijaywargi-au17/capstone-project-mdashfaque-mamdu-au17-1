@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Comment from "./Comment";
 import { actions } from "../../Redux";
 
 function CommentSection({ comments, post_author, post_id }) {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
+  const user = useSelector((state)=>{return state.app.user})
 
   const handleAdd = () => {
     if (input.length !== 0) {
       let commentObj = {
         body: input,
         post_id: post_id,
-        author_id: post_author._id,
+        author_id: user._id,
         likes: 0,
         replies: [],
       };
