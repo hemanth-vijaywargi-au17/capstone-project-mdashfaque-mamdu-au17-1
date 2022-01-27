@@ -9,13 +9,13 @@ appRoutes.get("/getAllUsers", async (req, res) => {
 });
 
 appRoutes.get("/getAllPosts", async (req, res) => {
-  const allPosts = await Post.find({});
+  const allPosts = await Post.find({}).populate('comments');
   res.json(allPosts);
 });
 
 appRoutes.post("/getPost", async (req, res) => {
   const { post_id } = req.body;
-  const response = await Post.find({ _id: post_id });
+  const response = await Post.find({ _id: post_id }).populate('comments');
   if (response.length !== 0) {
     res.json(response[0]);
   } else {
