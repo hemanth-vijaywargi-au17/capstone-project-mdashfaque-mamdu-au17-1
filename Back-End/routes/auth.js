@@ -14,13 +14,8 @@ authRoutes.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: "http://localhost:3000",
-    failureRedirect: "http://localhost:3000",
+    failureRedirect: "/login/failed",
   })
-);
-
-authRoutes.get(
-  "/google/callback2",
-  (req,res)=>{res.send('hello')}
 );
 
 // Logout Route
