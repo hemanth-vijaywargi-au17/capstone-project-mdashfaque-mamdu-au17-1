@@ -1,21 +1,22 @@
 // React
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 // React Router
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // Components
-import SignIn from "./Components/SignIn";
-import Write from "./Components/Write";
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Home";
-import Article from "./Components/Article/Article";
-import { ToastContainer } from "react-toastify";
-import ScrollToTop from './Components/ScrollToTop'
+import SignIn from './Components/SignIn';
+import Write from './Components/Write';
+import Navbar from './Components/Navbar/Navbar';
+import Home from './Components/Home';
+import Article from './Components/Article/Article';
+import { ToastContainer } from 'react-toastify';
+import ScrollToTop from './Components/ScrollToTop';
 // Redux
-import { useDispatch } from "react-redux";
-import { actions } from "./Redux";
+import { useDispatch } from 'react-redux';
+import { actions } from './Redux';
 // CSS
-import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import UserProfile from './Components/UserProfile/UserProfile';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-    <ScrollToTop/>
+      <ScrollToTop />
       <ToastContainer />
       <Navbar />
       <Routes>
@@ -34,6 +35,7 @@ function App() {
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/write" element={<Write />}></Route>
         <Route path="/article/:id" element={<Article />}></Route>
+        <Route path="/userprofile/:id" element={<UserProfile />}></Route>
       </Routes>
     </BrowserRouter>
   );
