@@ -1,0 +1,24 @@
+{
+  "name": "capstone-project-mdashfaque-mamdu-au17",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "heroku-prebuild": "cd Front-End/blog-app && npm install && npm run build && cd .. && cd .. && cd Back-End && npm install",
+    "start": "cd Back-End && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attainu/capstone-project-mdashfaque-mamdu-au17.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attainu/capstone-project-mdashfaque-mamdu-au17/issues"
+  },
+  "homepage": "https://github.com/attainu/capstone-project-mdashfaque-mamdu-au17#readme"
+}
