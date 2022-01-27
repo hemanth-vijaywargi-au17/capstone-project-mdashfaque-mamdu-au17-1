@@ -17,6 +17,7 @@ import { actions } from './Redux';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import UserProfile from './Components/UserProfile/UserProfile';
+import Help from './Components/Help/Help';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/write" element={<Write />}></Route>
         <Route path="/article/:id" element={<Article />}></Route>
         <Route path="/userprofile/:id" element={<UserProfile />}></Route>
+        <Route path="/help" element={<Help />}></Route>
       </Routes>
     </BrowserRouter>
   );
