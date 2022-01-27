@@ -9,6 +9,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home";
 import Article from "./Components/Article/Article";
 import { ToastContainer } from "react-toastify";
+import ScrollToTop from './Components/ScrollToTop'
 // Redux
 import { useDispatch } from "react-redux";
 import { actions } from "./Redux";
@@ -25,6 +26,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <ToastContainer />
       <Navbar />
       <Routes>

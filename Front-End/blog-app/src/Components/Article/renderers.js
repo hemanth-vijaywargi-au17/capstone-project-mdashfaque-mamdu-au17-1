@@ -1,10 +1,14 @@
 // Customizing how to render each block
+import { IoWarningOutline } from "react-icons/io5";
 
 const Warning = ({ data, className = "" }) => {
   return (
-    <div>
-      <div>{data.title}</div>
-      <div>{data.message}</div>
+    <div className="flex gap-4 p-4 rounded border-2 border-red-400 border-solid bg-red-50 text-red-700 m-4">
+      <IoWarningOutline stroke="hsl(10,61%,48%)" size={"1.7rem"} />
+      <div className="space-y-2">
+        <div className="font-semibold">{data.title}</div>
+        <div>{data.message}</div>
+      </div>
     </div>
   );
 };
@@ -25,7 +29,7 @@ const CheckList = ({ data, className = "" }) => {
 };
 
 const Delimiter = ({ data, className = "" }) => {
-  return <div>---</div>;
+  return <div className="font-bold text-6xl text-center my-2">---</div>;
 };
 
 const Code = ({ data, className = "" }) => {
@@ -68,12 +72,29 @@ const Image = ({ data: { url }, className = "" }) => {
     </div>
   );
 };
+
+const Quote = ({ data, className = "" }) => {
+  return (
+    <div className="p-4 border-8 border-green-600 border-solid bg-green-50 border-y-2 border-r-2 m-4">
+      <div className="text-green-800 font-semibold">{data.text}</div>
+      <div className="mt-2 text-sm pl-4">--- {data.caption}</div>
+    </div>
+  );
+};
+
+// const List = ({data, className = ""}) => {
+//   console.log(data)
+//   return null
+// }
+
 const renderers = {
   warning: Warning,
   checklist: CheckList,
   delimiter: Delimiter,
   code: Code,
   image: Image,
+  quote: Quote,
+  // list: List,
 };
 
 export default renderers;

@@ -101,7 +101,7 @@ const Article = () => {
                 <div className="bg-gray-100 rounded-lg p-1 px-2">
                   {article.tags.length !== 0 ? article.tags[0] : null}
                 </div>
-                {user_id === article.author._id ? (
+                {currentUser._id === article.author._id ? (
                   <div
                     className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
                     onClick={() => {
