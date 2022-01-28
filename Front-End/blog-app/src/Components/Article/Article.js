@@ -17,6 +17,7 @@ import DropDownMenu from "../DropDownMenu";
 import "./article.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import CommentSection from "../CommentSection";
+import ResponsiveContainer from "../ResponsiveContainer";
 
 const Article = () => {
   const { id } = useParams();
@@ -46,17 +47,27 @@ const Article = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 leading-7">
+    <ResponsiveContainer>
       {article && author ? (
-        <div className="w-full md:w-11/12 lg:w-9/12 xl:w-7/12">
+        /* Article Container */
+        <div className="px-4 leading-7">
+          {/* Category */}
           <p className="bg-gray-100 rounded-lg p-1 px-2 w-fit text-base text-gray-600">
             {article.tags.length !== 0 ? article.tags[0] : null}
           </p>
+          {/* Title */}
           <h1 className="">{article.title}</h1>
+          {/* Summary */}
           <p className="">{article.summary}</p>
 
           <div className="flex flex-col justify-center lg:justify-start lg:flex-row lg:items-center gap-4 py-4">
-            <div className="flex items-center gap-2 w-fit">
+            {/* Author Box */}
+            <div
+              className="flex items-center gap-2 w-fit cursor-pointer"
+              onClick={(e) => {
+                navigate(`/profile/${author._id}`);
+              }}
+            >
               <img
                 src={author.profilePicURL}
                 alt=""
@@ -68,7 +79,8 @@ const Article = () => {
               {author._id !== currentUser._id ? (
                 <FollowButton
                   isFollowing={currentUser.following.includes(author._id)}
-                  follow={() => {
+                  follow={(e) => {
+                    e.stopPropagation();
                     dispatch(
                       actions.follow({
                         followee_id: author._id,
@@ -76,7 +88,8 @@ const Article = () => {
                       })
                     );
                   }}
-                  unfollow={() => {
+                  unfollow={(e) => {
+                    e.stopPropagation();
                     dispatch(
                       actions.unfollow({
                         followee_id: author._id,
@@ -88,7 +101,7 @@ const Article = () => {
                 />
               ) : null}
             </div>
-
+            {/* All Other Data Box */}
             <div className="text-sm text-gray-600 flex gap-2 items-center border-none lg:border-2 lg:border-y-0 lg:border-r-0 lg:pl-2 border-gray-300 lg:border-solid">
               <div className="bg-gray-100 rounded-lg p-1 px-2 text-sm">
                 {new Date(article.updatedAt).toLocaleDateString(undefined, {
@@ -97,9 +110,11 @@ const Article = () => {
                 {new Date(article.updatedAt).getDate()},{" "}
                 {new Date(article.updatedAt).getFullYear()}
               </div>
+
               <div className="bg-gray-100 rounded-lg p-1 px-2">
                 {article.tags.length !== 0 ? article.tags[0] : null}
               </div>
+
               {currentUser._id === article.author._id ? (
                 <div
                   className="rounded-lg p-1 px-2 cursor-pointer bg-red-400"
@@ -111,6 +126,7 @@ const Article = () => {
                   Delete
                 </div>
               ) : null}
+
               <LikeButton
                 isLiked={currentUser.likedPosts.includes(id)}
                 like={() => {
@@ -121,6 +137,7 @@ const Article = () => {
                 }}
                 likes={article.likes}
               />
+
               <ReadingListButton
                 inList={currentUser.readingList.includes(article._id)}
                 add={() => {
@@ -131,6 +148,7 @@ const Article = () => {
                 }}
                 label={true}
               />
+
               {currentUser._id === author._id ? (
                 <DropDownMenu
                   menuButton={
@@ -153,22 +171,29 @@ const Article = () => {
               ) : null}
             </div>
           </div>
-
+          {/* Thumbnail */}
           <img
             src={article.thumbnailURL}
             alt={""}
             className="w-full border-2 border-gray-200 border-x-0 border-solid"
           />
-
+          {/* Article Body */}
           <Blocks data={article.body} renderers={renderers} />
-          <CommentSection comments={article.comments} post_author={author} post_id={id}/>
+          {/*Comment Section */}
+          <CommentSection
+            comments={article.comments}
+            post_author={author}
+            post_id={id}
+          />
         </div>
       ) : isLoading ? (
         <h2 className="loading-component pulsate-bck">Loading...</h2>
       ) : error ? (
-        "Sorry, this article does not exist or It was removed by the author."
+        <h2>
+          Sorry, this article does not exist or It was removed by the author.
+        </h2>
       ) : null}
-    </div>
+    </ResponsiveContainer>
   );
 };
 

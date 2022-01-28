@@ -3,11 +3,6 @@ const authRoutes = Router();
 const passport = require("passport");
 const User = require("../models/User");
 
-let CLIENT_URL = "/";
-if (process.env.NODE_ENV === "development") {
-  CLIENT_URL = "http://localhost:3000";
-}
-
 // Google Login Route
 authRoutes.get(
   "/google",
@@ -18,7 +13,7 @@ authRoutes.get(
 authRoutes.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL,
+    successRedirect: "http://localhost:3000",
     failureRedirect: "/login/failed",
   })
 );

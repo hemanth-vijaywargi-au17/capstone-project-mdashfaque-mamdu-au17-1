@@ -1,14 +1,14 @@
 import React from "react";
 import {RiUserFill, RiUserLine} from 'react-icons/ri'
 
-function FollowButton({ isFollowing, followers, follow, unfollow }) {
+function FollowButton({ isFollowing, followers, follow, unfollow, size }) {
   return     <>
   {isFollowing ? (
     <button
       onClick={unfollow}
       className="border-none article-btn"
     >
-      <RiUserFill size={"1.3rem"} />
+      <RiUserFill size={size||"1.3rem"} />
       <span>Following</span>
       <span>{followers}</span>
     </button>
@@ -17,7 +17,7 @@ function FollowButton({ isFollowing, followers, follow, unfollow }) {
       onClick={follow}
       className="border-none article-btn"
    >
-      <RiUserLine size={"1.3rem"} />
+      <RiUserLine size={size||"1.3rem"} />
       <span>Follow</span>
       <span>{followers}</span>
     </button>
