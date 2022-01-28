@@ -24,7 +24,7 @@ const appSlice = createSlice({
   reducers: {
     login: (state, action) => {
       const provider = action.payload;
-      window.open(`http://localhost:5000/auth/${provider}`, "_self");
+      window.open(`/auth/${provider}`, "_self");
     },
     clearError: (state, action) => {
       state.error = false;
