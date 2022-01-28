@@ -28,7 +28,7 @@ function ArticleCard(props) {
     <div
       className="
       grid w-full p-4 gap-2 font-sans cursor-pointer border-b-2 border-x-0 border-t-0 border-solid  border-gray-200 active:bg-gray-100 box-border
-      sm:grid-cols-3 md:gap-4 md:w-11/12 lg:w-4/6 xl:w-3/6"
+      sm:grid-cols-3 md:gap-4"
       onClick={() => {
         navigate(`/article/${_id}`);
       }}
@@ -52,7 +52,13 @@ function ArticleCard(props) {
       sm:order-1 sm:col-span-2"
       >
         {/* User Image and Name */}
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/profile/${author._id}`);
+          }}
+        >
           <img
             src={author.profilePicURL}
             alt=""

@@ -1,12 +1,8 @@
-.container__user__profile {
-  width: 80%;
-  margin: 0 auto;
-}
-
 .user__name {
   font-size: 1.6rem;
   padding: 1.3em 0;
   color: #212529;
+  margin: 0;
 }
 
 .follow__btn {
@@ -38,15 +34,4 @@
 .number__followers:hover {
   color: #212529;
   cursor: pointer;
-}
-
-@media screen and (min-width: 600px) {
-  .container__user__profile {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
-    width: 70%;
-    margin: 0 auto;
-  }
 }
