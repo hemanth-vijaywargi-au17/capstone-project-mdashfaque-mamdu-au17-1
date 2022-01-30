@@ -11,7 +11,7 @@ A user has to login to write his own story. A user can
 
 2. Add the stories to his/her reading list.
 
-3. Like, comment the Story.
+3. Like, comment on Story.
 
 4. Write his/her own story.
 
@@ -19,7 +19,39 @@ A user has to login to write his own story. A user can
 
 7. Delete the Stories written by him/her.
 
-# Key frameworks used:
+# Key Technologies used:
 <ul>
-  <li>Express.js</li>
+   <li>React.js</li>
+   <li>Redux</li>  
+   <li>Editor.js</li>  
+   <li>React toastify</li>  
+   <li>Tailwind CSS</li>  
+   <li>Database MongoDB Atlas</li>
+   <li>OAuth For authentication</li>
+   <li>Node, Express for backend</li>  
 </ul>
+
+# Installation Guide
+To use DEV BLOG, you can download the repo or clone it to your local machine. You can install DEV BLOG in the following steps:
+
+step 1:
+    once you have code in your local machine install dependencies.
+    
+step 2:
+    cd Backend/
+    npm i (for installing dependencies)
+    
+step 3:
+    cd Frontend/blog-app
+    npm i (for installing dependencies)
+
+step 4:
+    open two terminals
+    cd Backend/
+    npm start
+    
+step 5:
+    cd Frontend/blog-app
+    npm start
+   
+Note: Make sure you have setup your own database, cloudinary and have your own Google OAuth 2.0
