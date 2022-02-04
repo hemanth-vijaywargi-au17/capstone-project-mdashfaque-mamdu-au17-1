@@ -1,7 +1,7 @@
 # DEV BLOG
 
 # Introduction
-    DEB BLOG is a bloggin website. Using our web app One can share his knowledge and
+    DEV BLOG is a bloggin website. Using our web app One can share his knowledge and
 experience with other people.
 
 # Key Features
