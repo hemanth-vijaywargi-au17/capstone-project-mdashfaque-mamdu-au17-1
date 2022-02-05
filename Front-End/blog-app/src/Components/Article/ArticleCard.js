@@ -72,19 +72,19 @@ function ArticleCard(props) {
         <div className=" text-gray-600 text-base line-clamp-2">{summary}</div>
 
         <div
-          className="text-sm text-gray-600 flex items-center justify-between"
+          className="text-sm text-gray-600 flex items-center justify-between gap-4"
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
           <div className="flex items-center gap-2">
             {/* Date */}
-            <div className="bg-gray-100 rounded-lg p-1 px-2">
+            <div className="bg-gray-100 rounded-lg p-1 px-2 whitespace-nowrap">
               {date.toLocaleDateString(undefined, { month: "short" })}{" "}
               {date.getDate()}, {date.getFullYear()}
             </div>
             {/* Category */}
-            <div className="bg-gray-100 rounded-lg p-1 px-2">
+            <div className="bg-gray-100 rounded-lg p-1 px-2 line-clamp-1 ">
               {tags.length !== 0 ? tags[0] : null}
             </div>
           </div>
